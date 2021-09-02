@@ -32,15 +32,18 @@
 # ^"[\s\S]*"$
 
 ## Variables
-# ^([a-z])+(\w)*
+# ^([a-zA-Z])+(\w)*
 
 ## Operators
-# +         |       ^\+$
-# -         |       ^\-$
-# *         |       ^\*$
-# /         |       ^\/$
-# ==        |       ^(==)$
-# and       |       ^(and)$
-# or        |       ^(or)$
-# &&        |       ^(&&)$
-# ||        |       ^(||)$
+# +     | fuumashuriken  |       ^\+$
+# -     | kunai          |       ^\-$
+# *     | shuriken       |       ^\*$
+# /     | katana         |       ^\/$
+# ==    | kirigakure     |       ^(==)$
+# and   | sunagakure     |       ^(and)$
+# or    | konohagakure   |       ^(or)$
+# &&    | kumogakure     |       ^(&&)$
+# ||    | amegakure      |       ^(||)$
+# \n    | ^\\n$
+# \t    | ^\\t$
+# ;     | ^\;$
