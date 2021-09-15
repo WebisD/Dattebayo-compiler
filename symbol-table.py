@@ -1,0 +1,20 @@
+class SymbolTable:
+    """ Class for Symbol tables """
+
+    symbol_table = {}
+
+    def __init__(self) -> None:
+        pass
+    
+    @staticmethod
+    def get_varaible(variable):
+        type = variable[1]
+        name = SymbolTable.check_name(variable[0])
+
+        if not name:
+            print("Já existe, zé")
+
+    def check_name(name):
+        if name in SymbolTable.symbol_table:
+            return None
+
