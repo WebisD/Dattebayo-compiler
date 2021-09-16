@@ -1,6 +1,5 @@
-class DattebayoCompiler():
-    def __init__(self,
-                file= ""):
+class DattebayoCompiler:
+    def __init__(self, file=""):
         self.read_file(file)
 
     def read_file(self, file):

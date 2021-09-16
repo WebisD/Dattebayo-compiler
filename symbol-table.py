@@ -1,5 +1,5 @@
 class SymbolTable:
-    """ Class for Symbol tables """
+    """ Class for Symbols tables """
 
     symbol_table = {}
 
