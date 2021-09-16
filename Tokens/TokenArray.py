@@ -3,7 +3,9 @@ from Tokens.TokenEnum import TokenEnum
 
 
 class TokenArray(object):
-    def __init__(self, dict_tokens):
+    def __init__(self, dict_tokens=None):
+        if dict_tokens is None:
+            dict_tokens = {}
         self.dict_tokens = dict_tokens
         self.add_tokens()
 

@@ -16,6 +16,7 @@ class Main:
 
     def compileFile(self):
         compiler = DattebayoCompiler(self.dtb_file)
+        compiler.print_lexer_output()
 
 
 if __name__ == "__main__":
@@ -25,3 +26,4 @@ if __name__ == "__main__":
     args = ap.parse_args()
 
     main = Main(args.dtb_file)
+    main.compileFile()
