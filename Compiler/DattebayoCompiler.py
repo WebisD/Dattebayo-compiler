@@ -1,17 +1,19 @@
 class DattebayoCompiler:
     def __init__(self, file=""):
+        self.code = None
         self.read_file(file)
+        self.check_code()
 
     def read_file(self, file):
-        with open(file, "r") as file:
-            self.validate_code(file.readlines())
+        with open(file, "r") as code:
+            self.code = code
 
-    def validate_code(self, lines):
-        self.validate_lexer(lines)
-        self.validate_syntax(lines)
+    def check_code(self):
+        self.check_lexer(self.code)
+        self.check_syntax(self.code)
 
-    def validate_lexer(self, line):
+    def check_lexer(self, line):
         pass
 
-    def validate_syntax(self, line):
+    def check_syntax(self, line):
         pass
