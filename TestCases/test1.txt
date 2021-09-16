@@ -4,4 +4,6 @@ chakra soma(){
 
     rasengan soma = num1 + num2;
     sharingan(soma);
-} 
+}
+
+soma();

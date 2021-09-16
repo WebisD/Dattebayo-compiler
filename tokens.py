@@ -18,6 +18,7 @@
 # float     | raikiri       | ^(raikiri)$
 # bool      | zetsu         | ^(zetsu)$
 # string    | kuchiyose     | ^(kuchiyose)$
+# main      | naruto        | ^(naruto)$
 
 ## Integer
 # ^(-|\+)?\d+$
