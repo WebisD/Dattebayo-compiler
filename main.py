@@ -1,4 +1,4 @@
-from DattebayoCompiler import DattebayoCompiler
+from Compiler.DattebayoCompiler import DattebayoCompiler
 
 def main():
     compiler = DattebayoCompiler("file.txt")
