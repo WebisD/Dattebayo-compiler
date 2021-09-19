@@ -15,7 +15,7 @@ class Lexer:
         output: List[Any] = []
 
         for line in code.readlines():
-            for word in line.split(" "):
+            for word in line.split():
                 self.get_input(word)
                 try:
                     output.append(self.get_next_token())

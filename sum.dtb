@@ -1,0 +1,9 @@
+chakra soma() {
+    rasengan num1 = 10 ;
+    rasengan num2 = 12 ;
+
+    rasengan soma = num1 fuumashuriken num2 ;
+    sharingan(soma) ;
+}
+
+soma();
