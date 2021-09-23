@@ -26,4 +26,3 @@ if __name__ == "__main__":
     args = ap.parse_args()
 
     main = Main(args.dtb_file)
-    main.compileFile()

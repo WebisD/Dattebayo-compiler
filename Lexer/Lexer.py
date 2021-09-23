@@ -18,7 +18,8 @@ class Lexer:
             for word in line.split():
                 self.get_input(word)
                 try:
-                    output.append(self.get_next_token())
+                    tokens = self.get_next_token()
+                    output.extend(tokens)
                 except Exception as e:
                     output.append(e)
 
@@ -34,24 +35,42 @@ class Lexer:
         self.current_text: str or None = None
         self.is_reading: bool = False
 
-    def check_word(self, pattern:str, text: str) -> Optional[Match[str]]:
-        return re.fullmatch(pattern, text)
+    def check_word(self, pattern: str, text: str) -> Optional[Match[str]]:
+        return re.match(pattern, text)
 
-    def get_next_token(self):
+    def replace_word(self, pattern: str, replacement:str, target: str):
+        return re.sub(pattern, replacement, target)
+
+    def get_next_token(self) -> List[Token]:
         if not self.is_reading:
-            return False
+            return []
 
-        token = None
+        error = False
 
-        for k, v in self.token_array.dict_tokens.items():
-            if self.check_word(self.token_array.dict_tokens[k].regex, self.current_text):
-                token = self.token_array.dict_tokens[k]
-                break
+        tokens = []
 
-        if token is None:
+        while self.current_text != "" and not error:
+            continue_loop = False
+            # print(f"current text: {self.current_text}")
+
+            for k, v in self.token_array.dict_tokens.items():
+                match = self.check_word(self.token_array.dict_tokens[k].regex, self.current_text)
+                if match:
+                    # print(f"\tinside if: {self.token_array.dict_tokens[k].type}")
+                    tokens.append(Token(self.token_array.dict_tokens[k].type, match[0]))
+                    self.current_text = self.replace_word(self.token_array.dict_tokens[k].regex, '', self.current_text)
+                    continue_loop = True
+                    break
+
+            if continue_loop:
+                continue
+
+            error = True
+
+        if len(tokens) == 0 or error:
             self.error(self.current_text)
 
-        return token
+        return tokens
 
     def error(self, text):
         raise Exception(f"Invalid token: {text}")
