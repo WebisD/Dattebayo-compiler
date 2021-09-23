@@ -32,7 +32,7 @@
 ## String
 # ^"[\s\S]*"$
 
-## Variables
+## Identifiers
 # ^([a-zA-Z])+(\w)*
 
 ## Operators

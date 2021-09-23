@@ -37,3 +37,8 @@ class TokenArray(object):
         self.dict_tokens['rbrack'] = Token(TokenEnum.RBRACK, "rbrack", "^\}$")
         self.dict_tokens['equal'] = Token(TokenEnum.EQUAL, "equal", "^\=$")
         self.dict_tokens['endpoint'] = Token(TokenEnum.ENDPOINT, "endpoint", "^\;$")
+        self.dict_tokens['integer'] = Token(TokenEnum.INTEGER, "integer", "^(-|\+)?\d+$")
+        self.dict_tokens['float'] = Token(TokenEnum.FLOAT, "float", "^(-|\+)?[0-9]\d*(.\d+)?$")
+        self.dict_tokens['boolean'] = Token(TokenEnum.BOOLEAN, "boolean", "^(True|False|0|1)")
+        self.dict_tokens['string'] = Token(TokenEnum.STRING, "string", "^\"[\s\S]*\"$")
+        self.dict_tokens['identifier'] = Token(TokenEnum.IDENTIFIER, "identifier", "^([a-zA-Z])+(\w)*")

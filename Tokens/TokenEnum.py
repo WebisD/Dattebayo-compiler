@@ -30,3 +30,9 @@ class TokenEnum(Enum):
     RBRACK = "}"
     EQUAL = "="
     ENDPOINT = ";"
+    INTEGER = "INTEGER"
+    FLOAT = "FLOAT"
+    BOOLEAN = "BOOLEAN"
+    STRING = "STRING"
+    IDENTIFIER = "IDENTIFIER"
+
