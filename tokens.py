@@ -40,6 +40,7 @@
 # -     | kunai          |       ^\-$
 # *     | shuriken       |       ^\*$
 # /     | katana         |       ^\/$
+# =     | haku           |       ^=$
 # ==    | kirigakure     |       ^(==)$
 # and   | sunagakure     |       ^(and)$
 # or    | konohagakure   |       ^(or)$
