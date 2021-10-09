@@ -42,8 +42,6 @@
 # /     | katana         |       ^\/$
 # =     | haku           |       ^=$
 # ==    | kirigakure     |       ^(==)$
-# and   | sunagakure     |       ^(and)$
-# or    | konohagakure   |       ^(or)$
 # &&    | kumogakure     |       ^(&&)$
 # ||    | amegakure      |       ^(||)$
 # \n    | ^\\n$
