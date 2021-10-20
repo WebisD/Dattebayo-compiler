@@ -7,44 +7,52 @@ Num ⇐ INT | FLOAT ;
 
 Operation ⇐ FUUMASHURIKEN | KUNAI | SHURIKEN | KATANA ;
 
-NumOperation ⇐ (Num | IDENTIFIER) , Operation , (Num | IDENTIFIER) , [{Operation , (Num | IDENTIFIER)}] ; 
-
-StrOperation ⇐ STRING , FUUMASHURIKEN , STRING , [{FUUMASHURIKEN , STRING}] ;
+Values ⇐ Num | STRING | BOOLEAN | IDENTIFIER | NumOperation | StrOperation ;
 
 VariableType ⇐ RASENGAN | RAIKIRI | ZETSU | KUCHIYOSE ;
 
 VariableDeclaration ⇐ VariableType , IDENTIFIER ;
 
-Values ⇐ Num | STRING | BOOLEAN | IDENTIFIER | NumOperation | StrOperation;
-
 VariableDefinition ⇐ [VariableType] , IDENTIFIER , HAKU , Values;
 
-Expression ⇐ (VariableDeclaration | VariableDefinition) , ENDPOINT ;
+ExpressionVariable ⇐ (VariableDeclaration | VariableDefinition) , ENDPOINT ;
+
+ExpressionCondition ⇐ IfDeclaration | ElifDeclaration , ElseDeclaration 
+
+Operator ⇐ KUMOGAKURE , AMEGAKURE ;
+
+Comparators ⇐ KIRIGAKURE ;
+
+
+
+NumOperation ⇐ (Num | IDENTIFIER) , Operation , (Num | IDENTIFIER) , [{Operation , (Num | IDENTIFIER)}] ;
+
+StrOperation ⇐ STRING , FUUMASHURIKEN , STRING , [{FUUMASHURIKEN , STRING}] ;
+
+
 
 ReturnParam ⇐ (KAMUI | KAMUI , Values) , ENDPOINT ;
 
 FunctionParam ⇐ {[IDENTIFIER , ',']} , IDENTIFIER ;
 
-FunctionDeclaration ⇐ CHAKRA , IDENTIFIER , '(' , [FunctionParam] , ')' , '{' (Expression | ReturnParam | Expression , ReturnParam) , '}'
+FunctionDeclaration ⇐ CHAKRA , IDENTIFIER , LPAREN , [FunctionParam] , RPAREN , LBRACK , (Expression | ReturnParam | Expression , ReturnParam) , RBRACK
 
-FunctionCall ⇐ IDENTIFIER , '(' , [FunctionParam | Values] , ')' , ENDPOINT ;
+FunctionCall ⇐ IDENTIFIER , LPAREN , [FunctionParam | Values] , RPAREN , ENDPOINT ;
 
-Comparators ⇐ KUMOGAKURE , AMEGAKURE
 
-Operator ⇐ KIRIGAKURE
 
-ConditionParam ⇐ (Values , Comparators , Value)
+ConditionParam ⇐ (Values , Comparators , Value) ;
 
-MultipleConditionParam ⇐  {[ConditionParam , Comparators]} , ConditionParam
+MultipleConditionParam ⇐  {[ConditionParam , Operator]} , ConditionParam ;
 
-IfDeclaration ⇐ NINJUTSU , '(' , MultipleConditionParam , ')' , '{' , Expression , '}';
+IfDeclaration ⇐ NINJUTSU , LPAREN , MultipleConditionParam , RPAREN , LBRACK , Expression , RBRACK;
 
-ElifDeclaration ⇐ GENJUTSU , '(' , MultipleConditionParam , ')' , '{' , Expression , '}' ;
+ElifDeclaration ⇐ GENJUTSU , LPAREN , MultipleConditionParam , RPAREN , LBRACK , Expression , RBRACK ;
 
-ElseDeclaration ⇐ TAIJUTSU, '{' , Expression , '}';
+ElseDeclaration ⇐ TAIJUTSU, LBRACK , Expression , RBRACK;
 
-ForDeclaration ⇐ KAGEBUNSHIN , '(' , [{VariableDefinition}] , ENDPOINT , [MultipleConditionParam] , ENDPOINT , VariableDefinition ')' , '{' , Expression , '}'
+ForDeclaration ⇐ KAGEBUNSHIN , LPAREN , [{VariableDefinition}] , ENDPOINT , [MultipleConditionParam] , ENDPOINT , VariableDefinition RPAREN , LBRACK , Expression , RBRACK
 
-WhileDeclaration ⇐ TSUKUYOMI , '(' , MultipleConditionParam , ')' , '{' , Expression , '}' ;
+WhileDeclaration ⇐ TSUKUYOMI , LPAREN , MultipleConditionParam , RPAREN , LBRACK , Expression , RBRACK ;
 
-PrintDeclaration ⇐ SHARINGAN , '(' , Values , ')' , ENDPOINT ;
+PrintDeclaration ⇐ SHARINGAN , LPAREN , Values , RPAREN , ENDPOINT ;
