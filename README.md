@@ -11,13 +11,16 @@ Values ⇐ Num | STRING | BOOLEAN | IDENTIFIER | NumOperation | StrOperation ;
 
 VariableType ⇐ RASENGAN | RAIKIRI | ZETSU | KUCHIYOSE ;
 
+
+
+
 VariableDeclaration ⇐ VariableType , IDENTIFIER ;
 
 VariableDefinition ⇐ [VariableType] , IDENTIFIER , HAKU , Values;
 
 ExpressionVariable ⇐ (VariableDeclaration | VariableDefinition) , ENDPOINT ;
 
-ExpressionCondition ⇐ IfDeclaration | ElifDeclaration , ElseDeclaration 
+
 
 Operator ⇐ KUMOGAKURE , AMEGAKURE ;
 
@@ -28,6 +31,10 @@ Comparators ⇐ KIRIGAKURE ;
 NumOperation ⇐ (Num | IDENTIFIER) , Operation , (Num | IDENTIFIER) , [{Operation , (Num | IDENTIFIER)}] ;
 
 StrOperation ⇐ STRING , FUUMASHURIKEN , STRING , [{FUUMASHURIKEN , STRING}] ;
+
+
+ 
+Expression ⇐ ExpressionVariable | ConditionExpr | ForDeclaration | WhileDeclaration | PrintDeclaration ; 
 
 
 
@@ -56,3 +63,9 @@ ForDeclaration ⇐ KAGEBUNSHIN , LPAREN , [{VariableDefinition}] , ENDPOINT , [M
 WhileDeclaration ⇐ TSUKUYOMI , LPAREN , MultipleConditionParam , RPAREN , LBRACK , Expression , RBRACK ;
 
 PrintDeclaration ⇐ SHARINGAN , LPAREN , Values , RPAREN , ENDPOINT ;
+
+
+
+ConditionExpr ⇐ IfDeclaration | IfDeclaration , {ElifDeclaration} | IfDeclaration , {ElifDeclaration} , ElseDeclaration | IfDeclaration , ElseDeclaration;
+
+
