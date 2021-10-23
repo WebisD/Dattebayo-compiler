@@ -14,6 +14,8 @@ class OperationInterpreter():
         if self.current_token.type == token_type:
             try:
                 self.current_token = next(self.tokens)
+            except StopIteration as e:
+                pass
             except Exception as e:
                 print(f"Erro {self.current_token}")
         else:
@@ -50,5 +52,4 @@ class OperationInterpreter():
             elif token.type == te.KUNAI:
                 self.eat(te.KUNAI)
                 result = result - self.term()
-        print(result)
         return result

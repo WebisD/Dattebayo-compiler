@@ -1,5 +1,6 @@
 import re
 from typing import Optional, Match, List, Any
+from Tokens.TokenEnum import TokenEnum
 from typing.io import TextIO
 from Tokens.TokenArray import TokenArray
 from Tokens.Token import Token
@@ -57,7 +58,12 @@ class Lexer:
                 match = self.check_word(self.token_array.dict_tokens[k].regex, self.current_text)
                 if match:
                     # print(f"\tinside if: {self.token_array.dict_tokens[k].type}")
-                    tokens.append(Token(self.token_array.dict_tokens[k].type, match[0]))
+                    if self.token_array.dict_tokens[k].type == TokenEnum.INTEGER:
+                        tokens.append(Token(self.token_array.dict_tokens[k].type, int(match[0])))
+                    elif self.token_array.dict_tokens[k].type == TokenEnum.FLOAT:
+                        tokens.append(Token(self.token_array.dict_tokens[k].type, float(match[0])))
+                    else:
+                        tokens.append(Token(self.token_array.dict_tokens[k].type, match[0]))
                     self.current_text = self.replace_word(self.token_array.dict_tokens[k].regex, '', self.current_text)
                     continue_loop = True
                     break
