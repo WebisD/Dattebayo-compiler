@@ -5,14 +5,34 @@ from Interpreters.Interpreter import Interpreter
 
 
 class OperationInterpreter:
-    def __init__(self, token_array=None):
+    def __init__(self, token_index: int, token_array=None):
         if token_array is None:
             token_array = []
-        self.tokens = iter(token_array)
-        self.current_token: Token = next(self.tokens)
+        self.tokens = token_array
+        self.current_token: Token = token_array[token_index]
+        self.token_index = token_index
 
     def error(self):
         raise NotMatch
+
+    def eat(self, token_type):
+        if self.current_token.type == token_type:
+            try:
+                self.token_index += 1
+                self.current_token = self.tokens[self.token_index]
+            except IndexError as e:
+                pass
+            except Exception as e:
+                print(f"Error {self.current_token}")
+        else:
+            self.error()
+
+    def run_glc(self):
+        try:
+            result = self.expr()
+            return [True, self.token_index, result]
+        except:
+            return [False, self.token_index, None]
 
     def factor(self):
         """factor : INTEGER"""

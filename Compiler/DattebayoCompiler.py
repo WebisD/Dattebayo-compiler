@@ -7,7 +7,7 @@ from Interpreters.Interpreter import Interpreter
 class DattebayoCompiler:
     def __init__(self, file=""):
         self.lexer = Lexer()
-        self.operationInterpreter = None
+        self.interpreter = None
         self.lexer_output = None
         self.code_file: TextIO or None = None
         self.read_file(file)
@@ -29,8 +29,8 @@ class DattebayoCompiler:
         print(self.lexer_output)
 
     def check_syntax(self, line):
-        self.operationInterpreter = OperationInterpreter(self.lexer, self.lexer_output)
-        result = self.operationInterpreter.expr()
+        self.interpreter = Interpreter(self.lexer, self.lexer_output)
+        result = self.interpreter.parser()
         print(result)
 
     def print_lexer_output(self):

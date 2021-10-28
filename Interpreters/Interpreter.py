@@ -2,7 +2,9 @@ from Tokens.TokenEnum import TokenEnum as te
 from Tokens.Token import Token
 import Interpreters.OperationInterpreter as OpeI
 from Lexer.Lexer import Lexer
-from Interpreters.OperationInterpreter import OperationInterpreter
+from Interpreters.RThread import ThreadWithReturnValue
+#from Interpreters.OperationInterpreter import OperationInterpreter
+import Interpreters.OperationInterpreter
 
 
 class Interpreter:
@@ -12,8 +14,8 @@ class Interpreter:
 
         self.tokens = token_array
         self.lexer = lexer
-        self.current_token = self.lexer.get_next_token()
-
+        # self.current_token = self.lexer.get_next_token()
+        self.token_index = 0
         self.operationInterpreter = None
 
     def error(self):
@@ -21,19 +23,18 @@ class Interpreter:
 
     def parser(self):
         try:
-            self.operationInterpreter = OperationInterpreter(self.lexer, self.lexer)
-            print('oi')
-            #self.operation_interpreter.expr()
+            self.operationInterpreter = Interpreters.OperationInterpreter.OperationInterpreter(self.token_index, self.tokens)
+            tOp = ThreadWithReturnValue(target=self.operationInterpreter.run_glc)
+
+            tOp.start()
+
+            resultOp = tOp.join()
+
+            # Itś an Operation
+            if resultOp[0]:
+                print("It's a operation")
+
+                return resultOp[2]
+
         except Exception as e:
             print(e)
-
-    def eat(self, token_type):
-        if self.current_token.type == token_type:
-            try:
-                self.current_token = next(self.tokens)
-            except StopIteration as e:
-                pass
-            except Exception as e:
-                print(f"Error {self.current_token}")
-        else:
-            self.error()
