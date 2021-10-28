@@ -34,9 +34,9 @@ StrOperation ⇐ STRING , FUUMASHURIKEN , STRING , [{FUUMASHURIKEN , STRING}] ;
 
 
  
-Expression ⇐ ExpressionVariable | ConditionExpr | ForDeclaration | WhileDeclaration | PrintDeclaration ; 
+Expression ⇐ ExpressionVariable | ConditionExpr | ForDeclaration | WhileDeclaration | PrintDeclaration ;
 
-
+################### Aposentado #####################
 
 ReturnParam ⇐ (KAMUI | KAMUI , Values) , ENDPOINT ;
 
@@ -46,7 +46,7 @@ FunctionDeclaration ⇐ CHAKRA , IDENTIFIER , LPAREN , [FunctionParam] , RPAREN 
 
 FunctionCall ⇐ IDENTIFIER , LPAREN , [FunctionParam | Values] , RPAREN , ENDPOINT ;
 
-
+###################################################
 
 ConditionParam ⇐ (Values , Comparators , Value) ;
 
@@ -54,11 +54,15 @@ MultipleConditionParam ⇐  {[ConditionParam , Operator]} , ConditionParam ;
 
 IfDeclaration ⇐ NINJUTSU , LPAREN , MultipleConditionParam , RPAREN , LBRACK , Expression , RBRACK;
 
+################### Aposentado #####################
 ElifDeclaration ⇐ GENJUTSU , LPAREN , MultipleConditionParam , RPAREN , LBRACK , Expression , RBRACK ;
+####################################################
 
 ElseDeclaration ⇐ TAIJUTSU, LBRACK , Expression , RBRACK;
 
+################### Semi-Aposentado #####################
 ForDeclaration ⇐ KAGEBUNSHIN , LPAREN , [{VariableDefinition}] , ENDPOINT , [MultipleConditionParam] , ENDPOINT , VariableDefinition RPAREN , LBRACK , Expression , RBRACK
+#########################################################
 
 WhileDeclaration ⇐ TSUKUYOMI , LPAREN , MultipleConditionParam , RPAREN , LBRACK , Expression , RBRACK ;
 

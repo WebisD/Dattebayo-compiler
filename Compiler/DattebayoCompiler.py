@@ -1,6 +1,8 @@
 from typing import TextIO
 from Lexer.Lexer import Lexer
-from Interpreter.OperationInterpreter import OperationInterpreter
+from Interpreters.OperationInterpreter import OperationInterpreter
+from Interpreters.Interpreter import Interpreter
+
 
 class DattebayoCompiler:
     def __init__(self, file=""):
@@ -24,9 +26,10 @@ class DattebayoCompiler:
 
     def check_lexer(self, line):
         self.lexer_output = self.lexer.run_lexer(self.code_file)
+        print(self.lexer_output)
 
     def check_syntax(self, line):
-        self.operationInterpreter = OperationInterpreter(self.lexer_output)
+        self.operationInterpreter = OperationInterpreter(self.lexer, self.lexer_output)
         result = self.operationInterpreter.expr()
         print(result)
 

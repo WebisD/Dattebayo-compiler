@@ -1,25 +1,18 @@
 from Tokens.TokenEnum import TokenEnum as te
 from Tokens.Token import Token
+from Interpreters.Errors import NotMatch
+from Interpreters.Interpreter import Interpreter
 
 
-class OperationInterpreter():
-    def __init__(self, token_array=[]):
+class OperationInterpreter:
+    def __init__(self, token_array=None):
+        if token_array is None:
+            token_array = []
         self.tokens = iter(token_array)
         self.current_token: Token = next(self.tokens)
 
     def error(self):
-        raise Exception('Invalid syntax')
-
-    def eat(self, token_type):
-        if self.current_token.type == token_type:
-            try:
-                self.current_token = next(self.tokens)
-            except StopIteration as e:
-                pass
-            except Exception as e:
-                print(f"Erro {self.current_token}")
-        else:
-            self.error()
+        raise NotMatch
 
     def factor(self):
         """factor : INTEGER"""
@@ -28,6 +21,7 @@ class OperationInterpreter():
         return token.value
 
     def term(self):
+        """term : factor ((MUL | DIV) factor)*"""
         result = self.factor()
 
         while self.current_token.type in (te.SHURIKEN, te.KATANA):
@@ -42,6 +36,7 @@ class OperationInterpreter():
         return result
 
     def expr(self):
+        """expr : term ((PLUS | MINUS) term)*"""
         result = self.term()
 
         while self.current_token.type in (te.FUUMASHURIKEN, te.KUNAI):

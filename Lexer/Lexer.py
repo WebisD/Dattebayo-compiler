@@ -5,6 +5,12 @@ from typing.io import TextIO
 from Tokens.TokenArray import TokenArray
 from Tokens.Token import Token
 
+"""
+                Lexer
+
+Check if the words (tokens) are correct
+"""
+
 
 class Lexer:
     def __init__(self):
@@ -12,21 +18,37 @@ class Lexer:
         self.current_text: str or None = None
         self.is_reading: bool = False
 
+        self.all_tokens: List[Token] or None = None
+        self.index_tokens = 0
+        self.current_token = None
+
     def run_lexer(self, code: TextIO) -> List[Any]:
-        output: List[Any] = []
+        self.all_tokens: List[Any] = []
 
         for line in code.readlines():
             for word in line.split():
                 self.get_input(word)
                 try:
-                    tokens = self.get_next_token()
-                    output.extend(tokens)
+                    tokens = self.get_tokens()
+                    self.all_tokens.extend(tokens)
                 except Exception as e:
-                    output.append(e)
+                    self.all_tokens.append(e)
 
                 self.finish()
 
-        return output
+        return self.all_tokens
+
+    def get_next_token(self):
+        if not self.current_token:
+            self.index_tokens = 0
+
+        if self.index_tokens == len(self.all_tokens):
+            return None
+
+        self.current_token = self.all_tokens[self.index_tokens]
+        self.index_tokens += 1
+
+        return self.current_token
 
     def get_input(self, text):
         self.current_text = text
@@ -39,10 +61,10 @@ class Lexer:
     def check_word(self, pattern: str, text: str) -> Optional[Match[str]]:
         return re.match(pattern, text)
 
-    def replace_word(self, pattern: str, replacement:str, target: str):
+    def replace_word(self, pattern: str, replacement: str, target: str):
         return re.sub(pattern, replacement, target)
 
-    def get_next_token(self) -> List[Token]:
+    def get_tokens(self) -> List[Token]:
         if not self.is_reading:
             return []
 

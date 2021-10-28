@@ -9,6 +9,7 @@ Nome: Weverson da Silva Pereira       22.119.004-4
 import json
 from Symbol import Symbol
 
+
 class SymbolTable:
     """ Class for Symbols tables """
 
@@ -16,14 +17,15 @@ class SymbolTable:
 
     def __init__(self) -> None:
         pass
-    
+
     @staticmethod
     def set_varaible(kw_symbol):
-        SymbolTable.symbol_table[kw_symbol.name] = {"name": kw_symbol.name, "type": kw_symbol.type, "scope": kw_symbol.scope}
+        SymbolTable.symbol_table[kw_symbol.name] = {"name": kw_symbol.name, "type": kw_symbol.type,
+                                                    "scope": kw_symbol.scope}
 
     @staticmethod
     def get_symbol_table():
         return SymbolTable.symbol_table
 
     def __str__(self):
-        return json.dumps(SymbolTable.symbol_table, indent = 4)
+        return json.dumps(SymbolTable.symbol_table, indent=4)
