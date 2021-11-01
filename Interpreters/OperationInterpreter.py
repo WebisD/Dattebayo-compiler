@@ -1,37 +1,28 @@
 from Tokens.TokenEnum import TokenEnum as te
 from Tokens.Token import Token
 from Interpreters.Errors import NotMatch
-from Interpreters.Interpreter import Interpreter
+from Interpreters.Expression import Expression
+
+"""
+Expressions for math operations
+
+expr : term ((PLUS | MINUS) term)*
+term : factor ((MUL | DIV) factor)*
+factor : INTEGER
+"""
 
 
-class OperationInterpreter:
+class OperationInterpreter(Expression):
     def __init__(self, token_index: int, token_array=None):
-        if token_array is None:
-            token_array = []
-        self.tokens = token_array
-        self.current_token: Token = token_array[token_index]
-        self.token_index = token_index
-
-    def error(self):
-        raise NotMatch
-
-    def eat(self, token_type):
-        if self.current_token.type == token_type:
-            try:
-                self.token_index += 1
-                self.current_token = self.tokens[self.token_index]
-            except IndexError as e:
-                pass
-            except Exception as e:
-                print(f"Error {self.current_token}")
-        else:
-            self.error()
+        super().__init__(token_index, token_array)
 
     def run_glc(self):
+
+        #print("Op:", self.token_index, self.current_token)
         try:
             result = self.expr()
-            return [True, self.token_index, result]
-        except:
+            return [True, self.token_index, "operation"]
+        except Exception as e:
             return [False, self.token_index, None]
 
     def factor(self):

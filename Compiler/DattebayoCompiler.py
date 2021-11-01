@@ -31,7 +31,7 @@ class DattebayoCompiler:
     def check_syntax(self, line):
         self.interpreter = Interpreter(self.lexer, self.lexer_output)
         result = self.interpreter.parser()
-        print(result)
+        # print(result)
 
     def print_lexer_output(self):
         for token in self.lexer_output:

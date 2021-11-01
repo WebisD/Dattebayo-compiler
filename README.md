@@ -16,9 +16,9 @@ VariableType ⇐ RASENGAN | RAIKIRI | ZETSU | KUCHIYOSE ;
 
 VariableDeclaration ⇐ VariableType , IDENTIFIER ;
 
-VariableDefinition ⇐ [VariableType] , IDENTIFIER , HAKU , Values;
+VariableInitialization ⇐ [VariableType] , IDENTIFIER , HAKU , Values;
 
-ExpressionVariable ⇐ (VariableDeclaration | VariableDefinition) , ENDPOINT ;
+ExpressionVariable ⇐ (VariableDeclaration | VariableInitialization) , ENDPOINT ;
 
 
 

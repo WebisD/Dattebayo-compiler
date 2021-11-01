@@ -3,38 +3,51 @@ from Tokens.Token import Token
 import Interpreters.OperationInterpreter as OpeI
 from Lexer.Lexer import Lexer
 from Interpreters.RThread import ThreadWithReturnValue
-#from Interpreters.OperationInterpreter import OperationInterpreter
-import Interpreters.OperationInterpreter
+# from Interpreters.OperationInterpreter import OperationInterpreter
+# import Interpreters.OperationInterpreter
+from Interpreters.OperationInterpreter import OperationInterpreter
+from Interpreters.Variable.VariableExpression import VariableExpression
+from Interpreters.Expression import Expression
 
 
-class Interpreter:
+class Interpreter(Expression):
     def __init__(self, lexer, token_array=None):
-        if token_array is None:
-            token_array = []
-
-        self.tokens = token_array
-        self.lexer = lexer
-        # self.current_token = self.lexer.get_next_token()
         self.token_index = 0
-        self.operationInterpreter = None
+
+        super().__init__(self.token_index, token_array)
+
+        self.lexer = lexer
+
+        # Interpreters
+        self.expression = Expression(self.token_index, self.tokens)
+        self.operationInterpreter = OperationInterpreter(self.token_index, self.tokens)
+        self.variableInterpreter = VariableExpression(self.token_index, self.tokens)
 
     def error(self):
         raise Exception('Invalid syntax')
 
     def parser(self):
         try:
-            self.operationInterpreter = Interpreters.OperationInterpreter.OperationInterpreter(self.token_index, self.tokens)
-            tOp = ThreadWithReturnValue(target=self.operationInterpreter.run_glc)
 
-            tOp.start()
+            while self.token_index < len(self.tokens):
 
-            resultOp = tOp.join()
+                t_op = ThreadWithReturnValue(target=self.operationInterpreter.run_glc)
+                t_var_exp = ThreadWithReturnValue(target=self.variableInterpreter.run_glc)
 
-            # Itś an Operation
-            if resultOp[0]:
-                print("It's a operation")
+                list_threads = [t_op, t_var_exp]
 
-                return resultOp[2]
+                for thread in list_threads:
+                    thread.start()
+
+                results = []
+
+                for thread in list_threads:
+                    results.append(thread.join())
+
+                for result in results:
+                    if result[0]:
+                        print(f"It's a {result[2]}")
+                    #print(result)
 
         except Exception as e:
             print(e)
