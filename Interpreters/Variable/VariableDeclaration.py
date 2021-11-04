@@ -17,10 +17,9 @@ class VariableDeclaration(Expression):
         super().__init__(token_index, token_array)
 
     def run_glc(self):
-        #print("VD:", self.token_index, self.current_token)
         try:
             self.var_dec_glc()
-            return [True, self.token_index, None]
+            return [True, self.token_index, "Variable declaration"]
         except Exception as e:
             return [False, self.token_index, None]
 

@@ -30,13 +30,12 @@ class VariableExpression(Expression):
     def run_glc(self):
         try:
             result = self.var_exp()
-            result[2] = "Variable"
+            #result[2] = "Variable"
             return result
         except:
             return [False, self.token_index, None]
 
     def var_exp(self):
-
         t_var_dec = ThreadWithReturnValue(target=self.var_dec.run_glc)
         t_var_ini = ThreadWithReturnValue(target=self.var_ini.run_glc)
 

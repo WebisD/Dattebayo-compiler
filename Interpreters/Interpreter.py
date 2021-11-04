@@ -30,11 +30,13 @@ class Interpreter(Expression):
         try:
 
             while self.token_index < len(self.tokens):
+                self.operationInterpreter = OperationInterpreter(self.token_index, self.tokens)
+                self.variableInterpreter = VariableExpression(self.token_index, self.tokens)
 
                 t_op = ThreadWithReturnValue(target=self.operationInterpreter.run_glc)
                 t_var_exp = ThreadWithReturnValue(target=self.variableInterpreter.run_glc)
 
-                list_threads = [t_op, t_var_exp]
+                list_threads = [t_var_exp, t_op]
 
                 for thread in list_threads:
                     thread.start()
@@ -46,8 +48,10 @@ class Interpreter(Expression):
 
                 for result in results:
                     if result[0]:
+                        self.marker_index = result[1]
+                        self.update_interpreter_params()
                         print(f"It's a {result[2]}")
-                    #print(result)
+                    #print('---', result)
 
         except Exception as e:
-            print(e)
+            print('deu merda', e)

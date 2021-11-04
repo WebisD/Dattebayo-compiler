@@ -10,24 +10,27 @@ Parent class for all interpreters
 """
 
 
-class Expression(object):
-    __shared_state = {}
+#class Expression(object):
+class Expression:
+    #__shared_state = {}
 
     def __init__(self, token_index: int, token_array=None):
-        self.__dict__ = self.__shared_state
+        #self.__dict__ = self.__shared_state
         if token_array is None:
             token_array = []
         self.tokens = token_array
         self.current_token: Token = token_array[token_index]
         self.token_index = token_index
+        self.marker_index = 0
 
     def error(self):
         raise NotMatch
 
-    def update_interpreter_params(self, token_index):
-        if self.token_index < len(self.tokens):
-            self.token_index = token_index
-            self.current_token = self.tokens[self.token_index]
+    def update_interpreter_params(self):
+        if self.token_index != self.marker_index:
+            self.token_index = self.marker_index
+            if self.marker_index < len(self.tokens):
+                self.current_token: Token = self.tokens[self.token_index]
 
     def eat(self, token_type):
         if self.current_token.type == token_type:

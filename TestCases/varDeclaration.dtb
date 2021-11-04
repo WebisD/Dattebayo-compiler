@@ -1,3 +1,5 @@
-rasengan num1;
-num1 = 7;
-1 fuumashuriken 2 shuriken 3
+raikiri num1;
+num1 haku True;
+num1 haku "True";
+num1 haku 3;
+num1 haku 1 fuumashuriken 2 shuriken 3;

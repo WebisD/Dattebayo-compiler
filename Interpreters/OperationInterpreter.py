@@ -17,11 +17,9 @@ class OperationInterpreter(Expression):
         super().__init__(token_index, token_array)
 
     def run_glc(self):
-
-        #print("Op:", self.token_index, self.current_token)
         try:
             result = self.expr()
-            return [True, self.token_index, "operation"]
+            return [True, self.token_index, "number"]
         except Exception as e:
             return [False, self.token_index, None]
 
