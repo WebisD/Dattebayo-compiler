@@ -1,3 +1,4 @@
+from Interpreters.While.WhileDeclaration import WhileDeclaration
 from Tokens.TokenEnum import TokenEnum as te
 from Tokens.Token import Token
 import Interpreters.OperationInterpreter as OpeI
@@ -22,6 +23,7 @@ class Interpreter(Expression):
         self.expression = Expression(self.token_index, self.tokens)
         self.operationInterpreter = OperationInterpreter(self.token_index, self.tokens)
         self.variableInterpreter = VariableExpression(self.token_index, self.tokens)
+        self.whileInterpreter = WhileDeclaration(self.token_index, self.tokens)
 
     def error(self):
         raise Exception('Invalid syntax')
@@ -32,11 +34,13 @@ class Interpreter(Expression):
             while self.token_index < len(self.tokens):
                 self.operationInterpreter = OperationInterpreter(self.token_index, self.tokens)
                 self.variableInterpreter = VariableExpression(self.token_index, self.tokens)
+                self.whileInterpreter = WhileDeclaration(self.token_index, self.tokens)
 
                 t_op = ThreadWithReturnValue(target=self.operationInterpreter.run_glc)
                 t_var_exp = ThreadWithReturnValue(target=self.variableInterpreter.run_glc)
+                t_while_exp = ThreadWithReturnValue(target=self.whileInterpreter.run_glc)
 
-                list_threads = [t_var_exp, t_op]
+                list_threads = [t_var_exp, t_op, t_while_exp]
 
                 for thread in list_threads:
                     thread.start()
