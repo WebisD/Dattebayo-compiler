@@ -22,11 +22,17 @@ class Lexer:
         self.index_tokens = 0
         self.current_token = None
 
+        self.pattern_split_semicolon = ''';(?=(?:"[^"]*")*$)'''
+        self.pattern_split_text = '''\s+(?=(?:[^"]|"[^"]*")*$)'''
+
     def run_lexer(self, code: TextIO) -> List[Any]:
         self.all_tokens: List[Any] = []
 
         for line in code.readlines():
-            for word in line.split():
+            space_semicolon = re.sub(self.pattern_split_semicolon, ' ;', line)
+            splited_line = re.split(self.pattern_split_text, space_semicolon)
+            splited_line = list(filter(''.__ne__, splited_line))
+            for word in splited_line:
                 self.get_input(word)
                 try:
                     tokens = self.get_tokens()
@@ -37,18 +43,6 @@ class Lexer:
                 self.finish()
 
         return self.all_tokens
-
-    def get_next_token(self):
-        if not self.current_token:
-            self.index_tokens = 0
-
-        if self.index_tokens == len(self.all_tokens):
-            return None
-
-        self.current_token = self.all_tokens[self.index_tokens]
-        self.index_tokens += 1
-
-        return self.current_token
 
     def get_input(self, text):
         self.current_text = text

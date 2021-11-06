@@ -1,6 +1,5 @@
 from typing import TextIO
 from Lexer.Lexer import Lexer
-from Interpreters.OperationInterpreter import OperationInterpreter
 from Interpreters.Interpreter import Interpreter
 
 
