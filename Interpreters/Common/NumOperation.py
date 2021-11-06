@@ -12,7 +12,7 @@ factor : INTEGER
 """
 
 
-class OperationInterpreter(Expression):
+class NumOperation(Expression):
     def __init__(self, token_index: int, token_array=None):
         super().__init__(token_index, token_array)
 

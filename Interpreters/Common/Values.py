@@ -1,11 +1,8 @@
 from Tokens.TokenEnum import TokenEnum as te
-from Tokens.Token import Token
-from Interpreters.Errors import NotMatch
 from Interpreters.Expression import Expression
 
-from Interpreters.OperationInterpreter import OperationInterpreter
-from Interpreters.Common.Number import Number
-
+from Interpreters.Common.NumOperation import NumOperation
+from Interpreters.Common.StrOperation import StrOperation
 """
         Class for values accepted in variables and ifs condition
 
@@ -22,7 +19,8 @@ class Values(Expression):
     def __init__(self, token_index: int, token_array=None):
         super().__init__(token_index, token_array)
 
-        self.num_operation = OperationInterpreter(token_index, token_array)
+        self.num_operation = NumOperation(token_index, token_array)
+        self.str_operation = StrOperation(token_index, token_array)
 
     def run_glc(self):
         try:
@@ -32,6 +30,7 @@ class Values(Expression):
             return [False, self.token_index, None]
 
     def values_glc(self):
+        """Values : Num | STRING | BOOLEAN | IDENTIFIER | NumOperation | StrOperation"""
         token = self.current_token
         type_value = None
 
@@ -45,8 +44,11 @@ class Values(Expression):
             self.eat(te.FLOAT)
             type_value = "Number"
         elif token.type == te.STRING:
-            self.eat(te.STRING)
-            type_value = "String"
+            result = self.check_str_operation()
+            if result is not None:
+                type_value = result
+            else:
+                self.error()
         elif token.type == te.BOOLEAN:
             self.eat(te.BOOLEAN)
             type_value = "Boolean"
@@ -56,10 +58,17 @@ class Values(Expression):
         return [True, self.token_index, type_value]
 
     def check_num_operation(self):
-        self.num_operation = OperationInterpreter(self.token_index, self.tokens)
+        self.num_operation = NumOperation(self.token_index, self.tokens)
         num_op = self.num_operation.run_glc()
         if num_op[0]:
             self.marker_index = num_op[1]
             self.update_interpreter_params()
         return num_op[2]
 
+    def check_str_operation(self):
+        self.str_operation = StrOperation(self.token_index, self.tokens)
+        str_op = self.str_operation.run_glc()
+        if str_op[0]:
+            self.marker_index = str_op[1]
+            self.update_interpreter_params()
+        return str_op[2]

@@ -1,11 +1,7 @@
-from Tokens.TokenEnum import TokenEnum as te
-from Tokens.Token import Token
-import Interpreters.OperationInterpreter as OpeI
-from Lexer.Lexer import Lexer
 from Interpreters.RThread import ThreadWithReturnValue
 # from Interpreters.OperationInterpreter import OperationInterpreter
 # import Interpreters.OperationInterpreter
-from Interpreters.OperationInterpreter import OperationInterpreter
+from Interpreters.Common.NumOperation import NumOperation
 from Interpreters.Variable.VariableExpression import VariableExpression
 from Interpreters.Expression import Expression
 
@@ -20,7 +16,7 @@ class Interpreter(Expression):
 
         # Interpreters
         self.expression = Expression(self.token_index, self.tokens)
-        self.operationInterpreter = OperationInterpreter(self.token_index, self.tokens)
+        self.operationInterpreter = NumOperation(self.token_index, self.tokens)
         self.variableInterpreter = VariableExpression(self.token_index, self.tokens)
 
     def error(self):
@@ -30,7 +26,7 @@ class Interpreter(Expression):
         try:
 
             while self.token_index < len(self.tokens):
-                self.operationInterpreter = OperationInterpreter(self.token_index, self.tokens)
+                self.operationInterpreter = NumOperation(self.token_index, self.tokens)
                 self.variableInterpreter = VariableExpression(self.token_index, self.tokens)
 
                 t_op = ThreadWithReturnValue(target=self.operationInterpreter.run_glc)
