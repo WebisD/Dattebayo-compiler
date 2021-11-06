@@ -19,7 +19,7 @@ class NumOperation(Expression):
     def run_glc(self):
         try:
             result = self.expr()
-            return [True, self.token_index, "number"]
+            return [True, self.token_index, "Number"]
         except Exception as e:
             return [False, self.token_index, None]
 

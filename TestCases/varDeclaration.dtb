@@ -4,3 +4,6 @@ num1 haku 950;
 num1 haku True;
 num1 haku "True" fuumashuriken "True";
 num1 haku 1 fuumashuriken 2 shuriken 3;
+sharingan ("Hello, World");
+sharingan (9.8);
+sharingan (True);
