@@ -33,3 +33,5 @@ class TokenEnum(Enum):
     BOOLEAN = "BOOLEAN"
     STRING = "STRING"
     IDENTIFIER = "IDENTIFIER"
+    GENNIN = "<"
+    JUNNIN = ">"

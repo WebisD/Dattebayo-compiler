@@ -1,6 +1,7 @@
 from Interpreters.Common.Values import Values
 from Interpreters.RThread import ThreadWithReturnValue
 from Interpreters.Variable.VariableExpression import VariableExpression
+from Interpreters.While.ConditionParam import ConditionParam
 from Interpreters.While.MultipleConditionParam import MultipleConditionParam
 from Tokens.TokenEnum import TokenEnum as te
 from Tokens.Token import Token
@@ -14,9 +15,6 @@ Class for variables declaration of while loop
 
 WhileDeclaration ⇐ TSUKUYOMI , LPAREN , MultipleConditionParam , RPAREN , LBRACK , Expression , RBRACK ;
 
-MultipleConditionParam ⇐ {[ConditionParam , Operator]} , ConditionParam ;
-
-ConditionParam ⇐ (Values , Comparators , Value) ;
 """
 
 
@@ -30,10 +28,19 @@ class WhileDeclaration(Expression):
         try:
             self.eat(te.TSUKUYOMI)
             self.eat(te.LPAREN)
-            #result = self.var_mult_exp()
+            
+            if self.current_token.type == te.LPAREN:
+                self.var_multiple = MultipleConditionParam(self.token_index, self.tokens)
+                self.att_token(self.var_conditional())
+            else:
+                self.var_multiple = ConditionParam(self.token_index, self.tokens)
+                self.att_token(self.var_conditional())
+
             self.eat(te.RPAREN)
             self.eat(te.LBRACK)
-            result = self.var_exp()
+
+            self.var_expr = VariableExpression(self.token_index, self.tokens)
+            #self.att_token(self.var_exp())
             self.eat(te.RBRACK)
 
             self.end_point()
@@ -41,24 +48,14 @@ class WhileDeclaration(Expression):
         except:
             return [False, self.token_index, None]
 
-    def var_mult_exp(self):
-        t_var_mult_exp = ThreadWithReturnValue(target=self.var_mult_exp.run_glc)
-
-        t_var_mult_exp.start()
-
-        result_var_mult = t_var_mult_exp.join()
+    def var_conditional(self):
+        result_var_mult = self.var_multiple.run_glc()
 
         if result_var_mult[0]:
             return result_var_mult
 
         self.error()
 
-    def var_exp(self):
-        result_var_exp =self.var_expr.run_glc()
-
-        print(result_var_exp)
-        if result_var_exp[0]:
-            return result_var_exp
-
-        self.error()
-
+    def att_token(self, result):
+        self.current_token = self.tokens[result[1]]
+        self.token_index = result[1]

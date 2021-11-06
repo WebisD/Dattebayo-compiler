@@ -39,4 +39,6 @@ class TokenArray(object):
         self.dict_tokens['float'] = Token(TokenEnum.FLOAT, "float", "^(-|\+)?[0-9]\d*(.\d+)?")
         self.dict_tokens['boolean'] = Token(TokenEnum.BOOLEAN, "boolean", "^(True|False|0|1)")
         self.dict_tokens['string'] = Token(TokenEnum.STRING, "string", "^\"[\s\S]*\"")
+        self.dict_tokens['gennin'] = Token(TokenEnum.GENNIN, "gennin", "^(gennin)$")
+        self.dict_tokens['junnin'] = Token(TokenEnum.JUNNIN,  "junnin", "^(junnin)$")
         self.dict_tokens['identifier'] = Token(TokenEnum.IDENTIFIER, "identifier", "^([a-zA-Z])+(\w)*")

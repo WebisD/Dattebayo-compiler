@@ -20,9 +20,5 @@ class Main:
 
 
 if __name__ == "__main__":
-    from argparse import ArgumentParser
-    ap = ArgumentParser()
-    ap.add_argument('dtb_file', help='.dtb file that contains your dattebayo code')
-    args = ap.parse_args()
 
-    main = Main(args.dtb_file)
+    main = Main("TestCases/whileExpression.dtb")
