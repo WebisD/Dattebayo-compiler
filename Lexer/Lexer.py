@@ -53,7 +53,8 @@ class Lexer:
         self.is_reading: bool = False
 
     def check_word(self, pattern: str, text: str) -> Optional[Match[str]]:
-        return re.match(pattern, text)
+        match = re.match(pattern, text, re.MULTILINE)
+        return match
 
     def replace_word(self, pattern: str, replacement: str, target: str):
         return re.sub(pattern, replacement, target)
@@ -63,7 +64,7 @@ class Lexer:
         k_index = -1
 
         for k, v in self.token_array.dict_tokens.items():
-            match = self.check_word(self.token_array.dict_tokens[k].regex, self.current_text)
+            match = self.check_word(v.regex, self.current_text)
             if match:
                 num_match = match.end() - match.start()
                 if num_match > max_match[0]:

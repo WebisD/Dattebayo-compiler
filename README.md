@@ -3,73 +3,52 @@ Compiler
 
 ## GLC
 
+**Expression** ⇐ ExpressionVariable | ConditionExpr | WhileDeclaration | PrintDeclaration ;
+
+<br/><br/><br/>
+
+**ExpressionVariable** ⇐ (VariableDeclaration | VariableInitialization) , ENDPOINT ;
+
+**ConditionExpr** ⇐ IfDeclaration | IfDeclaration , ElseDeclaration;
+
+**WhileDeclaration** ⇐ TSUKUYOMI , LPAREN , MultipleConditionParam , RPAREN , LBRACK , Expression , RBRACK ;
+
+**PrintDeclaration** ⇐ SHARINGAN , LPAREN , Values , RPAREN , ENDPOINT ;
+
+<br/><br/><br/>
+
+**VariableDeclaration** ⇐ VariableType , IDENTIFIER ;
+
+**VariableType** ⇐ RASENGAN | RAIKIRI | ZETSU | KUCHIYOSE ;
+
+**VariableInitialization** ⇐ [VariableType] , IDENTIFIER , HAKU , Values;
+
+<br/><br/><br/>
+
+**IfDeclaration** ⇐ NINJUTSU , LPAREN , MultipleConditionParam , RPAREN , LBRACK , Expression , RBRACK;
 Num ⇐ INT | FLOAT ;
 
-Operation ⇐ FUUMASHURIKEN | KUNAI | SHURIKEN | KATANA ;
+**ElseDeclaration** ⇐ TAIJUTSU, LBRACK , Expression , RBRACK;
 
-Values ⇐ Num | STRING | BOOLEAN | IDENTIFIER | NumOperation | StrOperation ;
+<br/><br/><br/>
 
-VariableType ⇐ RASENGAN | RAIKIRI | ZETSU | KUCHIYOSE ;
+**MultipleConditionParam** ⇐  {[ConditionParam , Operator]} , ConditionParam ;
 
+**ConditionParam** ⇐ (Values , Comparators , Value) ;
 
+**Comparators** ⇐ KIRIGAKURE ;
 
+**Operator** ⇐ KUMOGAKURE , AMEGAKURE ;
 
-VariableDeclaration ⇐ VariableType , IDENTIFIER ;
+<br/><br/><br/>
 
-VariableInitialization ⇐ [VariableType] , IDENTIFIER , HAKU , Values;
+**Values** ⇐ Num | STRING | BOOLEAN | IDENTIFIER | NumOperation | StrOperation ;
 
-ExpressionVariable ⇐ (VariableDeclaration | VariableInitialization) , ENDPOINT ;
+**Num** : INT | FLOAT
 
+**NumOperation** ⇐ (Num | IDENTIFIER) , Operation , (Num | IDENTIFIER) , [{Operation , (Num | IDENTIFIER)}] ;
 
+**Operation** ⇐ FUUMASHURIKEN | KUNAI | SHURIKEN | KATANA ;
 
-Operator ⇐ KUMOGAKURE , AMEGAKURE ;
-
-Comparators ⇐ KIRIGAKURE ;
-
-
-
-NumOperation ⇐ (Num | IDENTIFIER) , Operation , (Num | IDENTIFIER) , [{Operation , (Num | IDENTIFIER)}] ;
-
-StrOperation ⇐ STRING , FUUMASHURIKEN , STRING , [{FUUMASHURIKEN , STRING}] ;
-
-
- 
-Expression ⇐ ExpressionVariable | ConditionExpr | ForDeclaration | WhileDeclaration | PrintDeclaration ;
-
-################### Aposentado #####################
-
-ReturnParam ⇐ (KAMUI | KAMUI , Values) , ENDPOINT ;
-
-FunctionParam ⇐ {[IDENTIFIER , ',']} , IDENTIFIER ;
-
-FunctionDeclaration ⇐ CHAKRA , IDENTIFIER , LPAREN , [FunctionParam] , RPAREN , LBRACK , (Expression | ReturnParam | Expression , ReturnParam) , RBRACK
-
-FunctionCall ⇐ IDENTIFIER , LPAREN , [FunctionParam | Values] , RPAREN , ENDPOINT ;
-
-###################################################
-
-ConditionParam ⇐ (Values , Comparators , Value) ;
-
-MultipleConditionParam ⇐  {[ConditionParam , Operator]} , ConditionParam ;
-
-IfDeclaration ⇐ NINJUTSU , LPAREN , MultipleConditionParam , RPAREN , LBRACK , Expression , RBRACK;
-
-################### Aposentado #####################
-ElifDeclaration ⇐ GENJUTSU , LPAREN , MultipleConditionParam , RPAREN , LBRACK , Expression , RBRACK ;
-####################################################
-
-ElseDeclaration ⇐ TAIJUTSU, LBRACK , Expression , RBRACK;
-
-################### Semi-Aposentado #####################
-ForDeclaration ⇐ KAGEBUNSHIN , LPAREN , [{VariableDefinition}] , ENDPOINT , [MultipleConditionParam] , ENDPOINT , VariableDefinition RPAREN , LBRACK , Expression , RBRACK
-#########################################################
-
-WhileDeclaration ⇐ TSUKUYOMI , LPAREN , MultipleConditionParam , RPAREN , LBRACK , Expression , RBRACK ;
-
-PrintDeclaration ⇐ SHARINGAN , LPAREN , Values , RPAREN , ENDPOINT ;
-
-
-
-ConditionExpr ⇐ IfDeclaration | IfDeclaration , {ElifDeclaration} | IfDeclaration , {ElifDeclaration} , ElseDeclaration | IfDeclaration , ElseDeclaration;
-
+**StrOperation** ⇐ STRING , FUUMASHURIKEN , STRING , [{FUUMASHURIKEN , STRING}] ;
 

@@ -1,10 +1,6 @@
-from Interpreters.While.ConditionParam import ConditionParam
+from Interpreters.Common.ConditionParam import ConditionParam
 from Tokens.TokenEnum import TokenEnum as te
-from Tokens.Token import Token
-from Interpreters.Errors import NotMatch
 from Interpreters.Expression import Expression
-from Interpreters.OperationInterpreter import OperationInterpreter
-from Interpreters.Common.Values import Values
 
 """
 Class for variables declaration without initialization
@@ -25,7 +21,7 @@ class MultipleConditionParam(Expression):
         try:
             self.eat(te.LPAREN)
             self.val_conditional = ConditionParam(self.token_index, self.tokens)
-            self.att_token(self.var_exp_contional())
+            self.att_token(self.var_exp_conditional())
             self.eat(te.RPAREN)
             if (self.current_token.type != te.LPAREN):
                 self.var_operator()
@@ -33,12 +29,17 @@ class MultipleConditionParam(Expression):
             if (self.current_token.type != te.RPAREN):
                 self.run_glc()
 
-            return [True, self.token_index, f'valid while expression']
+            return [True, self.token_index, f'valid multiple condition']
         except:
-            return [False, self.token_index, None]
+            if self.current_token.type == te.RPAREN:
+                return [True, self.token_index, f'valid single condition']
 
-    def var_exp_contional(self):
+            return [False, self.token_index, f'invalid multiple condition']
+
+    def var_exp_conditional(self):
         result_var_conditional = self.val_conditional.run_glc()
+
+        Expression.append_result(result_var_conditional[2])
 
         if result_var_conditional[0]:
             return result_var_conditional

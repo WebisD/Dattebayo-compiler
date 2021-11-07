@@ -1,11 +1,7 @@
-from Interpreters.Common.Values import Values
-from Interpreters.RThread import ThreadWithReturnValue
 from Interpreters.Variable.VariableExpression import VariableExpression
-from Interpreters.While.ConditionParam import ConditionParam
-from Interpreters.While.MultipleConditionParam import MultipleConditionParam
+from Interpreters.Common.ConditionParam import ConditionParam
+from Interpreters.Common.MultipleConditionParam import MultipleConditionParam
 from Tokens.TokenEnum import TokenEnum as te
-from Tokens.Token import Token
-from Interpreters.Errors import NotMatch
 from Interpreters.Expression import Expression
 
 """

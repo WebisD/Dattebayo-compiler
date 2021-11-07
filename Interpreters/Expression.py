@@ -10,9 +10,10 @@ Parent class for all interpreters
 """
 
 
-#class Expression(object):
 class Expression:
     #__shared_state = {}
+
+    logs = []
 
     def __init__(self, token_index: int, token_array=None):
         #self.__dict__ = self.__shared_state
@@ -37,6 +38,7 @@ class Expression:
             try:
                 self.token_index += 1
                 self.current_token = self.tokens[self.token_index]
+                Expression.append_result(f"ate {self.current_token}")
             except IndexError as e:
                 pass
             except Exception as e:
@@ -53,3 +55,13 @@ class Expression:
             self.eat(te.ENDPOINT)
         else:
             self.error()
+
+    @staticmethod
+    def print_logs():
+        print(f"Expression logs:\n")
+        for i, log in enumerate(Expression.logs):
+            print(f"{i}:{log}")
+
+    @staticmethod
+    def append_result(msg):
+        Expression.logs.append(msg)
