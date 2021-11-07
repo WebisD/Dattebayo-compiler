@@ -74,6 +74,6 @@ class Interpreter(Expression):
                 # return [True, self.token_index, None]
 
         except Exception as e:
-            print(e)
+            print(e, )
 
         return [False, self.token_index, None]

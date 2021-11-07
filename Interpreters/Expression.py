@@ -53,8 +53,8 @@ class Expression:
         token = self.current_token
         if token.type == te.ENDPOINT:
             self.eat(te.ENDPOINT)
-        else:
-            self.error()
+        # else:
+        #     self.error()
 
     @staticmethod
     def print_logs():

@@ -18,14 +18,22 @@ class StrOperation(Expression):
     def run_glc(self):
         try:
             result = self.expr()
-            return [True, self.token_index, "string"]
+            return [True, self.token_index, "valid string/ string operation"]
         except Exception as e:
-            return [False, self.token_index, None]
+            return [False, self.token_index, "invalid string/ string operation"]
 
     def factor(self):
         """factor : STRING"""
         token = self.current_token
-        self.eat(te.STRING)
+
+        if token.type == te.INTEGER:
+            self.eat(te.INTEGER)
+        elif token.type == te.FLOAT:
+            self.eat(te.FLOAT)
+        elif token.type == te.STRING:
+            self.eat(te.STRING)
+        else:
+            self.error()
         return token.value
 
     def expr(self):
