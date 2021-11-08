@@ -32,7 +32,7 @@ class MultipleConditionParam(Expression):
             return [True, self.token_index, f'valid multiple condition']
         except:
             if self.current_token.type == te.RPAREN:
-                return [True, self.token_index, f'valid single condition']
+                return [True, self.token_index, f'valid multiple condition']
 
             return [False, self.token_index, f'invalid multiple condition']
 

@@ -39,10 +39,9 @@ class WhileDeclaration(Expression):
             #self.att_token(self.var_exp())
             self.eat(te.RBRACK)
 
-            self.end_point()
             return [True, self.token_index, f'valid while expression']
         except:
-            return [False, self.token_index, None]
+            return [False, self.token_index, 'invalid while expression']
 
     def var_conditional(self):
         result_var_mult = self.var_multiple.run_glc()

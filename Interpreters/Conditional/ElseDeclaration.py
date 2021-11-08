@@ -1,5 +1,6 @@
+import copy
+
 from Interpreters.Expression import Expression
-# from Interpreters.Interpreter import Interpreter
 from Interpreters.RThread import ThreadWithReturnValue
 from Tokens.TokenEnum import TokenEnum as te
 
@@ -13,9 +14,9 @@ Expression : ExpressionVariable | ConditionExpr | WhileDeclaration | PrintDeclar
 
 
 class ElseDeclaration(Expression):
-    def __init__(self, token_index: int, token_array=None):
+    def __init__(self, token_index: int, token_array=None, interpreter=None):
         super().__init__(token_index, token_array)
-        # self.expression = Interpreter(token_index, token_array)
+        self.expression = copy.deepcopy(interpreter)
 
     def run_glc(self):
         try:
@@ -25,17 +26,23 @@ class ElseDeclaration(Expression):
             return [False, self.token_index, f'invalid else declaration']
 
     def else_dec_exp(self):
-        # t_expression = ThreadWithReturnValue(target=self.expression.parser)
-
         self.eat(te.TAIJUTSU)
         self.eat(te.LBRACK)
 
-        # t_expression.start()
-        # result_expression = t_expression.join()
+        self.expression.token_index = self.token_index
+        self.expression.current_token = self.current_token
+        t_expression = ThreadWithReturnValue(target=self.expression.parser)
+        t_expression.start()
+        result_expression = t_expression.join()
+
+        Expression.append_result(result_expression[2])
+
+        if result_expression[0]:
+            self.token_index = result_expression[1]
+            self.current_token = self.tokens[self.token_index]
+        else:
+            self.error()
 
         self.eat(te.RBRACK)
 
-        # if result_expression[0]:
         return True
-
-        # self.error()

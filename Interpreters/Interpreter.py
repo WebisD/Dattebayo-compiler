@@ -1,3 +1,5 @@
+import copy
+import sys
 from Interpreters.RThread import ThreadWithReturnValue
 # from Interpreters.OperationInterpreter import OperationInterpreter
 # import Interpreters.OperationInterpreter
@@ -7,6 +9,8 @@ from Interpreters.Expression import Expression
 from Interpreters.Print.PrintExpression import PrintExpression
 from Interpreters.While.WhileDeclaration import WhileDeclaration
 from Interpreters.Conditional.ConditionalExpression import ConditionalExpression
+from colorama import Fore, Style
+import traceback
 
 
 class Interpreter(Expression):
@@ -23,19 +27,20 @@ class Interpreter(Expression):
         self.variableInterpreter = VariableExpression(self.token_index, self.tokens)
         self.whileInterpreter = WhileDeclaration(self.token_index, self.tokens)
         self.printInterpreter = PrintExpression(self.token_index, self.tokens)
-        self.conditionalInterpreter = ConditionalExpression(self.token_index, self.tokens)
+        self.conditionalInterpreter = ConditionalExpression(self.token_index, self.tokens, copy.deepcopy(self))
 
     def error(self):
         raise Exception('Invalid syntax')
 
     def parser(self):
         try:
-            while self.token_index < len(self.tokens):
+            while self.token_index < len(self.tokens)-1:
+                # print(f"token: {self.token_index}")
                 self.operationInterpreter = NumOperation(self.token_index, self.tokens)
                 self.variableInterpreter = VariableExpression(self.token_index, self.tokens)
                 self.whileInterpreter = WhileDeclaration(self.token_index, self.tokens)
                 self.printInterpreter = PrintExpression(self.token_index, self.tokens)
-                self.conditionalInterpreter = ConditionalExpression(self.token_index, self.tokens)
+                self.conditionalInterpreter = ConditionalExpression(self.token_index, self.tokens, copy.deepcopy(self))
 
                 t_op = ThreadWithReturnValue(target=self.operationInterpreter.run_glc)
                 t_var_exp = ThreadWithReturnValue(target=self.variableInterpreter.run_glc)
@@ -60,20 +65,25 @@ class Interpreter(Expression):
                     results.append(thread.join())
 
                 errors = 0
+
                 for result in results:
+                    Expression.append_result(result[2])
                     if result[0]:
                         self.marker_index = result[1]
                         self.update_interpreter_params()
                         print(f"It's a {result[2]}")
                     else:
                         errors +=1
-                    # print('---', result)
 
                 if errors == len(list_threads):
                     raise Exception('Could not interpret anything')
                 # return [True, self.token_index, None]
 
         except Exception as e:
-            print(e, )
+            print(Fore.RED)
+            # traceback.print_exc()
+            print(e)
+            print(Style.RESET_ALL)
+            return [False, self.token_index, 'invalid expression']
 
-        return [False, self.token_index, None]
+        return [True, self.token_index, 'valid expression']

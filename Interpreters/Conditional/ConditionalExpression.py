@@ -14,10 +14,10 @@ ElseDeclaration : TAIJUTSU, LBRACK , Expression , RBRACK
 """
 
 class ConditionalExpression(Expression):
-    def __init__(self, token_index: int, token_array=None):
+    def __init__(self, token_index: int, token_array=None, interpreter=None):
         super().__init__(token_index, token_array)
-        self.if_dec = IfDeclaration(token_index, token_array)
-        self.else_dec = ElseDeclaration(token_index, token_array)
+        self.if_dec = IfDeclaration(token_index, token_array, interpreter)
+        self.else_dec = ElseDeclaration(token_index, token_array, interpreter)
 
     def run_glc(self):
         try:

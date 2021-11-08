@@ -24,12 +24,12 @@ class DattebayoCompiler:
     def check_code(self):
         self.check_lexer(self.code_file)
         self.check_syntax(self.code_file)
-        # Expression.print_logs()
+        Expression.print_logs()
 
     def check_lexer(self, line):
         self.log(self.__class__, self.check_lexer, "start")
         self.lexer_output = self.lexer.run_lexer(self.code_file)
-        self.print_lexer_output()
+        # self.print_lexer_output()
         self.log(self.__class__, self.check_lexer, "end")
 
     def check_syntax(self, line):
