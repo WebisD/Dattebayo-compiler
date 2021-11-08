@@ -22,7 +22,7 @@ class ConditionParam(Expression):
             self.var_exp()
             self.check_type_value()
 
-            return [True, self.token_index, f'valid conditional expression']
+            return [True, self.token_index, f'valid single condition']
         except:
             return [False, self.token_index, None]
 

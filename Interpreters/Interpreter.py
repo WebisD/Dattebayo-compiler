@@ -25,7 +25,7 @@ class Interpreter(Expression):
         self.expression = Expression(self.token_index, self.tokens)
         self.operationInterpreter = NumOperation(self.token_index, self.tokens)
         self.variableInterpreter = VariableExpression(self.token_index, self.tokens)
-        self.whileInterpreter = WhileDeclaration(self.token_index, self.tokens)
+        self.whileInterpreter = WhileDeclaration(self.token_index, self.tokens, copy.deepcopy(self))
         self.printInterpreter = PrintExpression(self.token_index, self.tokens)
         self.conditionalInterpreter = ConditionalExpression(self.token_index, self.tokens, copy.deepcopy(self))
 
@@ -38,7 +38,7 @@ class Interpreter(Expression):
                 # print(f"token: {self.token_index}")
                 self.operationInterpreter = NumOperation(self.token_index, self.tokens)
                 self.variableInterpreter = VariableExpression(self.token_index, self.tokens)
-                self.whileInterpreter = WhileDeclaration(self.token_index, self.tokens)
+                self.whileInterpreter = WhileDeclaration(self.token_index, self.tokens, copy.deepcopy(self))
                 self.printInterpreter = PrintExpression(self.token_index, self.tokens)
                 self.conditionalInterpreter = ConditionalExpression(self.token_index, self.tokens, copy.deepcopy(self))
 
