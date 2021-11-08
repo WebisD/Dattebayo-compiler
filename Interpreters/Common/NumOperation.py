@@ -19,14 +19,19 @@ class NumOperation(Expression):
     def run_glc(self):
         try:
             result = self.expr()
-            return [True, self.token_index, "Number"]
+            return [True, self.token_index, "valid number/number operation"]
         except Exception as e:
-            return [False, self.token_index, None]
+            return [False, self.token_index, "invalid number/number operation"]
 
     def factor(self):
         """factor : INTEGER"""
         token = self.current_token
-        self.eat(te.INTEGER)
+        if token.type == te.INTEGER:
+            self.eat(te.INTEGER)
+        elif token.type == te.FLOAT:
+            self.eat(te.FLOAT)
+        else:
+            self.error()
         return token.value
 
     def term(self):
@@ -56,4 +61,7 @@ class NumOperation(Expression):
             elif token.type == te.KUNAI:
                 self.eat(te.KUNAI)
                 result = result - self.term()
+
+        self.end_point()
+
         return result

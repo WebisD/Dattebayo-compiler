@@ -23,7 +23,7 @@ class PrintExpression(Expression):
             result = self.print_glc()
             return [True, self.token_index, f"Print with {result[2]}"]
         except Exception as e:
-            return [False, self.token_index, None]
+            return [False, self.token_index, 'invalid print']
 
     def print_glc(self):
         """PrintDeclaration ⇐ SHARINGAN , LPAREN , Values , RPAREN , ENDPOINT ;"""
