@@ -40,9 +40,7 @@ class ElseDeclaration(Expression):
         if result_expression[0]:
             self.token_index = result_expression[1]
             self.current_token = self.tokens[self.token_index]
-            self.eat(te.RBRACK)
         else:
-            self.eat(te.RBRACK)
             self.error()
 
         return True

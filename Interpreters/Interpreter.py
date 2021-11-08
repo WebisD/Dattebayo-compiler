@@ -10,8 +10,7 @@ from Interpreters.Print.PrintExpression import PrintExpression
 from Interpreters.While.WhileDeclaration import WhileDeclaration
 from Interpreters.Conditional.ConditionalExpression import ConditionalExpression
 from colorama import Fore, Style
-import traceback
-
+from Tokens.TokenEnum import TokenEnum as te
 
 class Interpreter(Expression):
     def __init__(self, lexer, token_array=None):
@@ -25,22 +24,25 @@ class Interpreter(Expression):
         self.expression = Expression(self.token_index, self.tokens)
         self.operationInterpreter = NumOperation(self.token_index, self.tokens)
         self.variableInterpreter = VariableExpression(self.token_index, self.tokens)
-        self.whileInterpreter = WhileDeclaration(self.token_index, self.tokens, copy.deepcopy(self))
+        self.whileInterpreter = WhileDeclaration(self.token_index, self.tokens)
         self.printInterpreter = PrintExpression(self.token_index, self.tokens)
-        self.conditionalInterpreter = ConditionalExpression(self.token_index, self.tokens, copy.deepcopy(self))
+        self.conditionalInterpreter = ConditionalExpression(self.token_index, self.tokens)
 
     def error(self):
         raise Exception('Invalid syntax')
 
     def parser(self):
         try:
+            interpreterCopy = copy.deepcopy(self)
+
             while self.token_index < len(self.tokens)-1:
                 # print(f"token: {self.token_index}")
+
                 self.operationInterpreter = NumOperation(self.token_index, self.tokens)
                 self.variableInterpreter = VariableExpression(self.token_index, self.tokens)
-                self.whileInterpreter = WhileDeclaration(self.token_index, self.tokens, copy.deepcopy(self))
+                self.whileInterpreter = WhileDeclaration(self.token_index, self.tokens, interpreterCopy)
                 self.printInterpreter = PrintExpression(self.token_index, self.tokens)
-                self.conditionalInterpreter = ConditionalExpression(self.token_index, self.tokens, copy.deepcopy(self))
+                self.conditionalInterpreter = ConditionalExpression(self.token_index, self.tokens, interpreterCopy)
 
                 t_op = ThreadWithReturnValue(target=self.operationInterpreter.run_glc)
                 t_var_exp = ThreadWithReturnValue(target=self.variableInterpreter.run_glc)
@@ -76,7 +78,10 @@ class Interpreter(Expression):
                         errors +=1
 
                 if errors == len(list_threads):
-                    raise Exception('Could not interpret anything')
+                    if self.tokens[self.token_index].type == te.RBRACK:
+                        self.eat(te.RBRACK)
+                    else:
+                        raise Exception(f'Could not interpret anything. Current token: {self.tokens[self.token_index]}')
                 # return [True, self.token_index, None]
 
         except Exception as e:

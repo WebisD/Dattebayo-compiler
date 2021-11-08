@@ -1,3 +1,4 @@
+from Interpreters.RThread import ThreadWithReturnValue
 from Tokens.TokenEnum import TokenEnum as te
 from Tokens.Token import Token
 from Interpreters.Errors import NotMatch
@@ -55,6 +56,12 @@ class Expression:
             self.eat(te.ENDPOINT)
         # else:
         #     self.error()
+
+    def run_thread(self, thread: ThreadWithReturnValue):
+        thread.start()
+        result = thread.join()
+        Expression.append_result(result[2])
+        return result
 
     @staticmethod
     def print_logs():

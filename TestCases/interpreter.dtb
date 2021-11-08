@@ -8,14 +8,13 @@ sharingan ("Hello, World");
 sharingan (9.8);
 sharingan (True);
 
-tsukuyomi ( ( 10 gennin 15 ) amegakure ( 10 gennin 15 ) amegakure ( 10 gennin 15 )) {
+tsukuyomi ( ( 10 gennin 15 )) {
+    1 fuumashuriken 2 shuriken 3 ;
 }
 
-ninjutsu ( (1 kirigakure 1) amegakure (1 kirigakure 1) ) {
-
+ninjutsu ( (1 kirigakure 1) ) {
+    4 fuumashuriken 5 shuriken 6 ;
 }
 taijutsu {
-
+    7 fuumashuriken 8 shuriken 9 ;
 }
-
-1 fuumashuriken 2 shuriken 3 ;

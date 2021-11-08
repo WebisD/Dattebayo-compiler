@@ -69,6 +69,4 @@ class IfDeclaration(Expression):
         else:
             self.error()
 
-        self.eat(te.RBRACK)
-
         return True
