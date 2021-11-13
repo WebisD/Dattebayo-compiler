@@ -6,8 +6,6 @@ from Tokens.TokenArray import TokenArray
 from Tokens.Token import Token
 
 """
-                Lexer
-
 Check if the words (tokens) are correct
 """
 

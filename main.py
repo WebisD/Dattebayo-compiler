@@ -1,7 +1,9 @@
 import sys
 from Compiler.DattebayoCompiler import DattebayoCompiler
 
-
+""" Calls the function that instantiates a compiler
+        
+"""
 class Main:
     def __init__(self, dtb_file):
         self.checkArgs(dtb_file)

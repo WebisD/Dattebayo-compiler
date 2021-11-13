@@ -2,7 +2,7 @@ from interfaces.LexerRulesInterface import LexerRulesInterface
 from domain.Component import Component
 
 
-class SintaxParser():
+class SyntaxParser():
     def __init__(self,
                 lexer_rules = None):
         self.lexer_rules = lexer_rules

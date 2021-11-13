@@ -1,0 +1,7 @@
+symbol-table module
+=====================
+
+.. automodule:: symbol-table
+   :members:
+   :undoc-members:
+   :show-inheritance:
