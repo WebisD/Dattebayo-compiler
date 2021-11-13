@@ -1,5 +1,6 @@
 import copy
 import sys
+import os
 from Interpreters.RThread import ThreadWithReturnValue
 # from Interpreters.OperationInterpreter import OperationInterpreter
 # import Interpreters.OperationInterpreter
@@ -89,6 +90,7 @@ class Interpreter(Expression):
             # traceback.print_exc()
             print(e)
             print(Style.RESET_ALL)
+            os.remove("./output.py")
             return [False, self.token_index, 'invalid expression']
 
         return [True, self.token_index, 'valid expression']

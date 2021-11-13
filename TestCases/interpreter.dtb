@@ -9,12 +9,13 @@ sharingan (9.8);
 sharingan (True);
 
 tsukuyomi ( ( 10 gennin 15 )) {
-    1 fuumashuriken 2 shuriken 3 ;
+    num2 haku 10000 ;
+    sharingan (True);
 }
 
 ninjutsu ( (1 kirigakure 1) ) {
-    4 fuumashuriken 5 shuriken 6 ;
+    num2 haku 2000 ;
 }
 taijutsu {
-    7 fuumashuriken 8 shuriken 9 ;
+    num2 haku 3000 ;
 }

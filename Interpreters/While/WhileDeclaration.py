@@ -25,8 +25,10 @@ class WhileDeclaration(Expression):
     def run_glc(self):
         try:
             self.eat(te.TSUKUYOMI)
+            self.output_lines+= te.TSUKUYOMI.value
             self.eat(te.LPAREN)
-            
+            self.output_lines+= te.LPAREN.value
+
             if self.current_token.type == te.LPAREN:
                 self.var_multiple = MultipleConditionParam(self.token_index, self.tokens)
                 self.att_token(self.var_conditional())
@@ -34,8 +36,12 @@ class WhileDeclaration(Expression):
                 self.var_multiple = ConditionParam(self.token_index, self.tokens)
                 self.att_token(self.var_conditional())
 
+            self.output_lines+=self.var_multiple.output_lines
             self.eat(te.RPAREN)
+            self.output_lines+= te.RPAREN.value
             self.eat(te.LBRACK)
+            self.output_lines+= ":\n"
+            self.append_to_file()
 
             self.expression.token_index = self.token_index
             self.expression.current_token = self.current_token
@@ -51,10 +57,7 @@ class WhileDeclaration(Expression):
             else:
                 self.error()
 
-
-            #self.att_token(self.var_exp())
             self.eat(te.RBRACK)
-
             return [True, self.token_index, f'valid while expression']
         except:
             return [False, self.token_index, 'invalid while expression']

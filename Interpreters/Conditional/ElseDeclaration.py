@@ -27,8 +27,10 @@ class ElseDeclaration(Expression):
 
     def else_dec_exp(self):
         self.eat(te.TAIJUTSU)
+        self.output_lines+= te.TAIJUTSU.value
         self.eat(te.LBRACK)
-
+        self.output_lines+= ":\n"
+        self.append_to_file()
         self.expression.token_index = self.token_index
         self.expression.current_token = self.current_token
         t_expression = ThreadWithReturnValue(target=self.expression.parser)
@@ -43,4 +45,5 @@ class ElseDeclaration(Expression):
         else:
             self.error()
 
+        self.append_to_file()
         return True

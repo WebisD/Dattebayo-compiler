@@ -18,8 +18,11 @@ class ConditionParam(Expression):
 
     def run_glc(self):
         try:
+            
             self.check_type_value()
+            token_exp = self.current_token
             self.var_exp()
+            self.output_lines+= " " + token_exp.type.value + " "
             self.check_type_value()
 
             return [True, self.token_index, f'valid single condition']
@@ -33,6 +36,7 @@ class ConditionParam(Expression):
         Expression.append_result(type_value[2])
 
         if type_value[0]:
+            self.output_lines+=str(self.values_interpreter.output_lines)
             self.marker_index = type_value[1]
             self.update_interpreter_params()
             return type_value

@@ -24,6 +24,7 @@ class Expression:
         self.current_token: Token = token_array[token_index]
         self.token_index = token_index
         self.marker_index = 0
+        self.output_lines = ""
 
     def error(self):
         raise NotMatch
@@ -72,3 +73,9 @@ class Expression:
     @staticmethod
     def append_result(msg):
         Expression.logs.append(msg)
+
+    def append_to_file(self):
+        file_object = open('./output.py', 'a')
+        file_object.write(self.output_lines)
+        file_object.close()
+        self.output_lines=""

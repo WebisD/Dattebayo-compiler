@@ -20,11 +20,16 @@ class MultipleConditionParam(Expression):
     def run_glc(self):
         try:
             self.eat(te.LPAREN)
+            self.output_lines+= te.LPAREN.value
             self.val_conditional = ConditionParam(self.token_index, self.tokens)
             self.att_token(self.var_exp_conditional())
+            self.output_lines+= self.val_conditional.output_lines
             self.eat(te.RPAREN)
+            self.output_lines+= te.RPAREN.value
             if (self.current_token.type != te.LPAREN):
+                token_exp = self.current_token
                 self.var_operator()
+                self.output_lines+= " " + token_exp.type.value + " "
 
             if (self.current_token.type != te.RPAREN):
                 self.run_glc()

@@ -28,11 +28,16 @@ class PrintExpression(Expression):
     def print_glc(self):
         """PrintDeclaration ⇐ SHARINGAN , LPAREN , Values , RPAREN , ENDPOINT ;"""
         self.eat(te.SHARINGAN)
+        self.output_lines+=te.SHARINGAN.value
         self.eat(te.LPAREN)
+        self.output_lines+=te.LPAREN.value
         type_value = self.check_value_params()
+        
         self.eat(te.RPAREN)
+        self.output_lines+=te.RPAREN.value
         self.end_point()
-
+        self.output_lines+="\n"
+        self.append_to_file()
         return type_value
 
     def check_value_params(self):
@@ -40,6 +45,7 @@ class PrintExpression(Expression):
         type_value = self.values_interpreter.run_glc()
 
         if type_value[0]:
+            self.output_lines+=str(self.values_interpreter.output_lines)
             self.marker_index = type_value[1]
             self.update_interpreter_params()
 

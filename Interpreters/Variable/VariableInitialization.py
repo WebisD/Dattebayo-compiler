@@ -34,13 +34,18 @@ class VariableInitialization(Expression):
         except:
             pass
 
+        token_ide = self.current_token
         self.eat(te.IDENTIFIER)
+        self.output_lines+=token_ide.value + " "
         self.eat(te.HAKU)
+        self.output_lines+=te.HAKU.value + " "
 
         type_value = self.check_type_value()
 
         self.end_point()
+        self.output_lines+="\n"
 
+        self.append_to_file()
         return type_value
 
     def variable_type(self):
@@ -64,6 +69,7 @@ class VariableInitialization(Expression):
         type_value = self.values_interpreter.run_glc()
 
         if type_value[0]:
+            self.output_lines+=str(self.values_interpreter.output_lines)
             self.marker_index = type_value[1]
             self.update_interpreter_params()
 

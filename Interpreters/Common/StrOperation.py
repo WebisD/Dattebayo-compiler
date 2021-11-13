@@ -34,6 +34,7 @@ class StrOperation(Expression):
             self.eat(te.STRING)
         else:
             self.error()
+        self.output_lines+=str(token.value)
         return token.value
 
     def expr(self):
@@ -44,5 +45,6 @@ class StrOperation(Expression):
             token = self.current_token
             if token.type == te.FUUMASHURIKEN:
                 self.eat(te.FUUMASHURIKEN)
+                self.output_lines+=" " + str(te.FUUMASHURIKEN.value) + " "
                 result = result + self.factor()
         return result

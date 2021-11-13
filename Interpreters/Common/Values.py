@@ -42,6 +42,7 @@ class Values(Expression):
                 self.error()
         elif token.type == te.FLOAT:
             self.eat(te.FLOAT)
+            self.output_lines+=str(token.value)
             type_value = "Number"
         elif token.type == te.STRING:
             result = self.check_str_operation()
@@ -51,6 +52,7 @@ class Values(Expression):
                 self.error()
         elif token.type == te.BOOLEAN:
             self.eat(te.BOOLEAN)
+            self.output_lines+=str(token.value)
             type_value = "Boolean"
         else:
             self.error()
@@ -61,6 +63,7 @@ class Values(Expression):
         self.num_operation = NumOperation(self.token_index, self.tokens)
         num_op = self.num_operation.run_glc()
         if num_op[0]:
+            self.output_lines+=self.num_operation.output_lines
             self.marker_index = num_op[1]
             self.update_interpreter_params()
         return num_op[2]
@@ -69,6 +72,7 @@ class Values(Expression):
         self.str_operation = StrOperation(self.token_index, self.tokens)
         str_op = self.str_operation.run_glc()
         if str_op[0]:
+            self.output_lines+=self.str_operation.output_lines
             self.marker_index = str_op[1]
             self.update_interpreter_params()
         return str_op[2]

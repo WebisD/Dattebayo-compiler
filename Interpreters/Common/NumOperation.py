@@ -32,6 +32,7 @@ class NumOperation(Expression):
             self.eat(te.FLOAT)
         else:
             self.error()
+        self.output_lines+=str(token.value)
         return token.value
 
     def term(self):
@@ -42,9 +43,11 @@ class NumOperation(Expression):
             token = self.current_token
             if token.type == te.SHURIKEN:
                 self.eat(te.SHURIKEN)
+                self.output_lines+=str(te.SHURIKEN.value)
                 result = result * self.factor()
             elif token.type == te.KATANA:
                 self.eat(te.KATANA)
+                self.output_lines+=str(te.KATANA.value)
                 result = result / self.factor()
 
         return result
@@ -57,9 +60,11 @@ class NumOperation(Expression):
             token = self.current_token
             if token.type == te.FUUMASHURIKEN:
                 self.eat(te.FUUMASHURIKEN)
+                self.output_lines+=str(te.FUUMASHURIKEN.value)
                 result = result + self.term()
             elif token.type == te.KUNAI:
                 self.eat(te.KUNAI)
+                self.output_lines+=str(te.KUNAI.value)
                 result = result - self.term()
 
         self.end_point()
