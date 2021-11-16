@@ -13,6 +13,7 @@ class Number(Expression):
         super().__init__(token_index, token_array)
 
     def run_glc(self):
+
         try:
             token = self.current_token
 

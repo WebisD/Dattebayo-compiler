@@ -16,6 +16,7 @@ class StrOperation(Expression):
         super().__init__(token_index, token_array)
 
     def run_glc(self):
+
         try:
             result = self.expr()
             return [True, self.token_index, "valid string/ string operation"]

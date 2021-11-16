@@ -15,3 +15,10 @@ class ThreadWithReturnValue(Thread):
     def join(self, *args):
         Thread.join(self, *args)
         return self._return
+
+    def __repr__(self):
+        return f"<ThreadWithReturnValue( " \
+               f"name:{self.name}, " \
+               f"id: {self.ident} " \
+               f"{self.}" \
+               f")>"

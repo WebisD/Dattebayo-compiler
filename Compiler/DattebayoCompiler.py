@@ -1,6 +1,5 @@
 from typing import TextIO
 
-from Interpreters.Expression import Expression
 from Lexer.Lexer import Lexer
 from Interpreters.Interpreter import Interpreter
 
@@ -24,7 +23,7 @@ class DattebayoCompiler:
     def check_code(self):
         self.check_lexer(self.code_file)
         self.check_syntax(self.code_file)
-        Expression.print_logs()
+        # Expression.print_logs()
 
     def check_lexer(self, line):
         self.log(self.__class__, self.check_lexer, "start")
@@ -35,9 +34,13 @@ class DattebayoCompiler:
     def check_syntax(self, line):
         self.log(self.__class__, self.check_syntax, "start")
         self.interpreter = Interpreter(self.lexer, self.lexer_output)
+        self.interpreter.prepare_output()
         result = self.interpreter.parser()
         # print(result)
         self.log(self.__class__, self.check_syntax, "end")
+
+    def generate_python_code(self):
+        self.interpreter.append_to_output()
 
     def print_lexer_output(self):
         for token in self.lexer_output:

@@ -34,6 +34,7 @@ class Interpreter(Expression):
     def parser(self):
         try:
             interpreterCopy = copy.deepcopy(self)
+            # Expression.decrease_indent()
 
             while self.token_index < len(self.tokens)-1:
                 # print(f"token: {self.token_index}")
@@ -63,6 +64,7 @@ class Interpreter(Expression):
 
                 results = []
 
+                Expression.decrease_indent()
                 for thread in list_threads:
                     results.append(thread.join())
 
@@ -80,6 +82,7 @@ class Interpreter(Expression):
                 if errors == len(list_threads):
                     if self.tokens[self.token_index].type == te.RBRACK:
                         self.eat(te.RBRACK)
+                        Expression.decrease_indent()
                     else:
                         raise Exception(f'Could not interpret anything. Current token: {self.tokens[self.token_index]}')
                 # return [True, self.token_index, None]

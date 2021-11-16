@@ -1,4 +1,6 @@
 import copy
+import sys
+import threading
 
 from Interpreters.Expression import Expression
 from Interpreters.RThread import ThreadWithReturnValue
@@ -57,8 +59,12 @@ class IfDeclaration(Expression):
 
         self.expression.token_index = self.token_index
         self.expression.current_token = self.current_token
+
         t_expression = ThreadWithReturnValue(target=self.expression.parser)
         t_expression.start()
+
+        print(threading.enumerate())
+
         result_expression = t_expression.join()
 
         Expression.append_result(result_expression[2])

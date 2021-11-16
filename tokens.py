@@ -47,3 +47,5 @@
 # \n    | ^\\n$
 # \t    | ^\\t$
 # ;     | ^\;$
+# >     | juunin         |       ^(junnin)$
+# <     | gennin         |       ^(gennin)$

@@ -37,6 +37,8 @@ class WhileDeclaration(Expression):
             self.eat(te.RPAREN)
             self.eat(te.LBRACK)
 
+            Expression.increase_indent()
+
             self.expression.token_index = self.token_index
             self.expression.current_token = self.current_token
             t_expression = ThreadWithReturnValue(target=self.expression.parser)
