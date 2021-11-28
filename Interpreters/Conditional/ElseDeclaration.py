@@ -21,7 +21,7 @@ class ElseDeclaration(Expression):
     def run_glc(self):
         try:
             self.else_dec_exp()
-            return [True, self.token_index, f'valid else declaration']
+            return [True, self.token_index, f'valid else declaration', self.output_lines]
         except:
             return [False, self.token_index, f'invalid else declaration']
 
@@ -30,9 +30,11 @@ class ElseDeclaration(Expression):
         self.output_lines+= te.TAIJUTSU.value
         self.eat(te.LBRACK)
         self.output_lines+= ":\n"
-        self.append_to_file()
+
         self.expression.token_index = self.token_index
         self.expression.current_token = self.current_token
+        self.expression.tokens = self.broke_array()
+
         t_expression = ThreadWithReturnValue(target=self.expression.parser)
         t_expression.start()
         result_expression = t_expression.join()
@@ -42,8 +44,10 @@ class ElseDeclaration(Expression):
         if result_expression[0]:
             self.token_index = result_expression[1]
             self.current_token = self.tokens[self.token_index]
+            self.output_lines+= "\t" + (self.expression.output_lines).replace("\n", "\n\t")
         else:
             self.error()
 
-        self.append_to_file()
+        self.output_lines = self.output_lines[:-1]
+
         return True

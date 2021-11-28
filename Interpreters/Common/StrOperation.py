@@ -18,7 +18,7 @@ class StrOperation(Expression):
     def run_glc(self):
         try:
             result = self.expr()
-            return [True, self.token_index, "valid string/ string operation"]
+            return [True, self.token_index, "valid string/ string operation", self.output_lines]
         except Exception as e:
             return [False, self.token_index, "invalid string/ string operation"]
 

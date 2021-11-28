@@ -34,6 +34,7 @@ class Interpreter(Expression):
 
     def parser(self):
         try:
+            self.output_lines = ""
             interpreterCopy = copy.deepcopy(self)
 
             while self.token_index < len(self.tokens)-1:
@@ -72,6 +73,8 @@ class Interpreter(Expression):
                 for result in results:
                     Expression.append_result(result[2])
                     if result[0]:
+                        if len(result) >= 3:
+                            self.output_lines+=result[3]
                         self.marker_index = result[1]
                         self.update_interpreter_params()
                         print(f"It's a {result[2]}")
@@ -90,7 +93,6 @@ class Interpreter(Expression):
             # traceback.print_exc()
             print(e)
             print(Style.RESET_ALL)
-            os.remove("./output.py")
-            return [False, self.token_index, 'invalid expression']
+            return [False, self.token_index, 'invalid expression', ""]
 
-        return [True, self.token_index, 'valid expression']
+        return [True, self.token_index, 'valid expression', self.output_lines]

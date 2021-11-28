@@ -22,7 +22,7 @@ class ConditionalExpression(Expression):
     def run_glc(self):
         try:
             result = self.cond_exp()
-            return [True, self.token_index, result[2]]
+            return [True, self.token_index, result[2], self.output_lines]
         except:
             return [False, self.token_index, f'invalid conditional expression']
 
@@ -41,9 +41,11 @@ class ConditionalExpression(Expression):
 
         if result_if_dec[0]:
             self.token_index = result_if_dec[1]
+            self.output_lines+= result_if_dec[3]
             return result_if_dec
         elif result_else_dec[0]:
             self.token_index = result_else_dec[1]
+            self.output_lines+= result_else_dec[3]
             return result_else_dec
 
         self.error()

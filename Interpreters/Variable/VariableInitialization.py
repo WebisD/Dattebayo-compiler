@@ -24,7 +24,7 @@ class VariableInitialization(Expression):
     def run_glc(self):
         try:
             result = self.var_ini_glc()
-            return [True, self.token_index, f'Variable initialized with {result[2]}']
+            return [True, self.token_index, f'Variable initialized with {result[2]}', self.output_lines]
         except:
             return [False, self.token_index, None]
 
@@ -45,7 +45,7 @@ class VariableInitialization(Expression):
         self.end_point()
         self.output_lines+="\n"
 
-        self.append_to_file()
+
         return type_value
 
     def variable_type(self):

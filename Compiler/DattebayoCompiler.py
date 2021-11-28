@@ -24,7 +24,7 @@ class DattebayoCompiler:
     def check_code(self):
         self.check_lexer(self.code_file)
         self.check_syntax(self.code_file)
-        Expression.print_logs()
+        # Expression.print_logs()
 
     def check_lexer(self, line):
         self.log(self.__class__, self.check_lexer, "start")
@@ -36,7 +36,8 @@ class DattebayoCompiler:
         self.log(self.__class__, self.check_syntax, "start")
         self.interpreter = Interpreter(self.lexer, self.lexer_output)
         result = self.interpreter.parser()
-        # print(result)
+        if result[0]:
+            self.interpreter.append_to_file()
         self.log(self.__class__, self.check_syntax, "end")
 
     def print_lexer_output(self):

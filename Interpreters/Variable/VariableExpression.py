@@ -30,7 +30,7 @@ class VariableExpression(Expression):
     def run_glc(self):
         try:
             result = self.var_exp()
-            return [True, result[1], 'valid variable expression']
+            return [True, result[1], 'valid variable expression', self.output_lines]
         except:
             return [False, self.token_index, 'invalid variable expression']
 
@@ -45,8 +45,10 @@ class VariableExpression(Expression):
         result_var_inc = t_var_ini.join()
 
         if result_var_dec[0]:
+            self.output_lines+=result_var_dec[3]
             return result_var_dec
         elif result_var_inc[0]:
+            self.output_lines+=result_var_inc[3]
             return result_var_inc
 
         self.error()

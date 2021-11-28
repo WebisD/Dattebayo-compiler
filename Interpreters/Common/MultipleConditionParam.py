@@ -34,12 +34,12 @@ class MultipleConditionParam(Expression):
             if (self.current_token.type != te.RPAREN):
                 self.run_glc()
 
-            return [True, self.token_index, f'valid multiple condition']
+            return [True, self.token_index, f'valid multiple condition', self.output_lines]
         except:
             if self.current_token.type == te.RPAREN:
-                return [True, self.token_index, f'valid multiple condition']
+                return [True, self.token_index, f'valid multiple condition', self.output_lines]
 
-            return [False, self.token_index, f'invalid multiple condition']
+            return [False, self.token_index, f'invalid multiple condition', ""]
 
     def var_exp_conditional(self):
         result_var_conditional = self.val_conditional.run_glc()

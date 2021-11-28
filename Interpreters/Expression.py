@@ -79,3 +79,21 @@ class Expression:
         file_object.write(self.output_lines)
         file_object.close()
         self.output_lines=""
+
+    def broke_array(self):
+        tokens_read  = self.tokens[self.token_index : len(self.tokens)]
+
+        index = 0
+        limit = 0
+        actual = 0
+
+        for item in tokens_read:
+            if item.type == te.RBRACK:
+                if actual == limit:
+                    actual+= 1
+                    break
+            if item.type == te.LBRACK:
+                limit+= 1
+            index += 1
+
+        return self.tokens[0 : self.token_index + index]

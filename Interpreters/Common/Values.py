@@ -57,7 +57,7 @@ class Values(Expression):
         else:
             self.error()
 
-        return [True, self.token_index, type_value]
+        return [True, self.token_index, type_value, self.output_lines]
 
     def check_num_operation(self):
         self.num_operation = NumOperation(self.token_index, self.tokens)

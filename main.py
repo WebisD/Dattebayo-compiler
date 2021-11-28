@@ -21,4 +21,4 @@ class Main:
 
 if __name__ == "__main__":
 
-    main = Main(sys.argv[1])
+    main = Main("TestCases/interpreter.dtb")

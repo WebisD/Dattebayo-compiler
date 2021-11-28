@@ -19,7 +19,7 @@ class NumOperation(Expression):
     def run_glc(self):
         try:
             result = self.expr()
-            return [True, self.token_index, "valid number/number operation"]
+            return [True, self.token_index, "valid number/number operation", self.output_lines]
         except Exception as e:
             return [False, self.token_index, "invalid number/number operation"]
 

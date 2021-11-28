@@ -25,9 +25,9 @@ class ConditionParam(Expression):
             self.output_lines+= " " + token_exp.type.value + " "
             self.check_type_value()
 
-            return [True, self.token_index, f'valid single condition']
+            return [True, self.token_index, f'valid single condition', self.output_lines]
         except:
-            return [False, self.token_index, None]
+            return [False, self.token_index, None, ""]
 
     def check_type_value(self):
         self.values_interpreter = Values(self.token_index, self.tokens)

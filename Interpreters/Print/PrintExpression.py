@@ -21,7 +21,7 @@ class PrintExpression(Expression):
     def run_glc(self):
         try:
             result = self.print_glc()
-            return [True, self.token_index, f"Print with {result[2]}"]
+            return [True, self.token_index, f"Print with {result[2]}", self.output_lines]
         except Exception as e:
             return [False, self.token_index, 'invalid print']
 
@@ -37,7 +37,7 @@ class PrintExpression(Expression):
         self.output_lines+=te.RPAREN.value
         self.end_point()
         self.output_lines+="\n"
-        self.append_to_file()
+
         return type_value
 
     def check_value_params(self):

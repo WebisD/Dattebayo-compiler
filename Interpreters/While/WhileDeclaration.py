@@ -2,6 +2,7 @@ from Interpreters.RThread import ThreadWithReturnValue
 from Interpreters.Variable.VariableExpression import VariableExpression
 from Interpreters.Common.ConditionParam import ConditionParam
 from Interpreters.Common.MultipleConditionParam import MultipleConditionParam
+from Tokens.Token import Token
 from Tokens.TokenEnum import TokenEnum as te
 from Interpreters.Expression import Expression
 
@@ -41,10 +42,11 @@ class WhileDeclaration(Expression):
             self.output_lines+= te.RPAREN.value
             self.eat(te.LBRACK)
             self.output_lines+= ":\n"
-            self.append_to_file()
 
             self.expression.token_index = self.token_index
             self.expression.current_token = self.current_token
+            self.expression.tokens = self.broke_array()
+
             t_expression = ThreadWithReturnValue(target=self.expression.parser)
             t_expression.start()
             result_expression = t_expression.join()
@@ -54,11 +56,14 @@ class WhileDeclaration(Expression):
             if result_expression[0]:
                 self.token_index = result_expression[1]
                 self.current_token = self.tokens[self.token_index]
+                self.output_lines+= "\t" + (self.expression.output_lines).replace("\n", "\n\t")
             else:
                 self.error()
+            self.output_lines = self.output_lines[:-1]
 
             self.eat(te.RBRACK)
-            return [True, self.token_index, f'valid while expression']
+
+            return [True, self.token_index, f'valid while expression', self.output_lines]
         except:
             return [False, self.token_index, 'invalid while expression']
 
