@@ -13,18 +13,21 @@ IfDeclaration : NINJUTSU , LPAREN , MultipleConditionParam , RPAREN , LBRACK , E
 ElseDeclaration : TAIJUTSU, LBRACK , Expression , RBRACK
 """
 
+
 class ConditionalExpression(Expression):
     def __init__(self, token_index: int, token_array=None, interpreter=None):
         super().__init__(token_index, token_array)
+        self.a = interpreter
+
         self.if_dec = IfDeclaration(token_index, token_array, interpreter)
         self.else_dec = ElseDeclaration(token_index, token_array, interpreter)
 
     def run_glc(self):
         try:
             result = self.cond_exp()
-            return [True, self.token_index, result[2]]
+            return [True, self.token_index, result[2], result[3]]
         except:
-            return [False, self.token_index, f'invalid conditional expression']
+            return [False, self.token_index, f'invalid conditional expression', None]
 
     def cond_exp(self) -> bool or None:
         t_if_dec = ThreadWithReturnValue(target=self.if_dec.run_glc)

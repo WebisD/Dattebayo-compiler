@@ -2,6 +2,8 @@ from Tokens.TokenEnum import TokenEnum as te
 from Interpreters.Expression import Expression
 from Interpreters.Common.Values import Values
 
+from AST.VariableAST import VariableAST
+
 """
 Class for variables declaration without initialization
 
@@ -24,9 +26,10 @@ class VariableInitialization(Expression):
     def run_glc(self):
         try:
             result = self.var_ini_glc()
-            return [True, self.token_index, f'Variable initialized with {result[2]}']
-        except:
-            return [False, self.token_index, None]
+            return [True, self.token_index, f'initialized with {result[2]}', result[3]]
+        except Exception as e:
+            a = e
+            return [False, self.token_index, None, None]
 
     def var_ini_glc(self):
         try:
@@ -34,13 +37,17 @@ class VariableInitialization(Expression):
         except:
             pass
 
+        name = self.current_token
         self.eat(te.IDENTIFIER)
+
         self.eat(te.HAKU)
 
         type_value = self.check_type_value()
 
         self.end_point()
 
+        node = VariableAST(name=name.value, value=type_value[3])
+        type_value[3] = node
         return type_value
 
     def variable_type(self):

@@ -30,9 +30,9 @@ class VariableExpression(Expression):
     def run_glc(self):
         try:
             result = self.var_exp()
-            return [True, result[1], 'valid variable expression']
+            return [True, result[1], f'valid variable expression {result[2]}', result[3]]
         except:
-            return [False, self.token_index, 'invalid variable expression']
+            return [False, self.token_index, 'invalid variable expression', None]
 
     def var_exp(self):
         t_var_dec = ThreadWithReturnValue(target=self.var_dec.run_glc)

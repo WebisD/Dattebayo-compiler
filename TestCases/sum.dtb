@@ -1,9 +1,7 @@
-chakra soma(){
-    rasengan num1 = 10;
-    rasengan num2 = 12;
-gg
-    rasengan soma = num1 + num2;
-    sharingan(soma);
-}
+raikiri num1 haku 9.8 ;
+rasengan num2 haku 12;
 
-soma();
+rasengan total haku num1 fuumashuriken num2;
+
+sharingan ("Total:");
+sharingan (total);

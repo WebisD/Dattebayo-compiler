@@ -4,6 +4,8 @@ from Interpreters.Expression import Expression
 from Interpreters.RThread import ThreadWithReturnValue
 from Tokens.TokenEnum import TokenEnum as te
 
+from AST.ElseAST import ElseAST
+
 """
 GLC
 
@@ -20,27 +22,39 @@ class ElseDeclaration(Expression):
 
     def run_glc(self):
         try:
-            self.else_dec_exp()
-            return [True, self.token_index, f'valid else declaration']
-        except:
-            return [False, self.token_index, f'invalid else declaration']
+            result = self.else_dec_exp()
+            return [True, self.token_index, f'valid else declaration', result]
+        except Exception as e:
+            a = e
+            return [False, self.token_index, f'invalid else declaration', None]
 
     def else_dec_exp(self):
         self.eat(te.TAIJUTSU)
         self.eat(te.LBRACK)
 
-        self.expression.token_index = self.token_index
-        self.expression.current_token = self.current_token
-        t_expression = ThreadWithReturnValue(target=self.expression.parser)
-        t_expression.start()
-        result_expression = t_expression.join()
+        result_list = []
 
-        Expression.append_result(result_expression[2])
+        while self.current_token.type != te.RBRACK:
+            self.expression.token_index = self.token_index
+            self.expression.current_token = self.current_token
+            t_expression = ThreadWithReturnValue(target=self.expression.run_parser)
 
-        if result_expression[0]:
-            self.token_index = result_expression[1]
-            self.current_token = self.tokens[self.token_index]
-        else:
-            self.error()
+            t_expression.start()
+            print("START")
+            result_expression = t_expression.join()
+            print("RESULT")
+            Expression.append_result(result_expression[2])
 
-        return True
+            if result_expression[0]:
+                self.token_index = result_expression[1]
+                self.current_token = self.tokens[self.token_index]
+                result_list.append(result_expression[3])
+            else:
+                print("AQUI")
+                self.error()
+
+        self.eat(te.RBRACK)
+
+        node = ElseAST(scope=result_list)
+
+        return node

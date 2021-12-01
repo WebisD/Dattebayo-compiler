@@ -7,6 +7,8 @@ from Interpreters.Variable.VariableInitialization import VariableInitialization
 from Interpreters.RThread import ThreadWithReturnValue
 from Interpreters.Common.Values import Values
 
+from AST.PrintAST import PrintAST
+
 """
                                     GLC
 PrintDeclaration ⇐ SHARINGAN , LPAREN , Values , RPAREN , ENDPOINT ;
@@ -21,7 +23,7 @@ class PrintExpression(Expression):
     def run_glc(self):
         try:
             result = self.print_glc()
-            return [True, self.token_index, f"Print with {result[2]}"]
+            return [True, self.token_index, f"Print with {result[2]}", result[3]]
         except Exception as e:
             return [False, self.token_index, 'invalid print']
 
@@ -32,6 +34,9 @@ class PrintExpression(Expression):
         type_value = self.check_value_params()
         self.eat(te.RPAREN)
         self.end_point()
+
+        node = PrintAST(value=type_value[3])
+        type_value[3] = node
 
         return type_value
 

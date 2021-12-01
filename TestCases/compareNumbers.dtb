@@ -1,0 +1,14 @@
+rasengan var1 haku 189;
+rasengan var2 haku 200;
+
+ninjutsu ( var1 kirigakure var2 ) {
+    sharingan ("Equals");
+}
+taijutsu {
+    ninjutsu ( var1 junnin var2 ) {
+        sharingan ("Var1 greater");
+    }
+    taijutsu {
+        sharingan ("Var2 greater");
+    }
+}

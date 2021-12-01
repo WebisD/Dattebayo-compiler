@@ -5,6 +5,8 @@ from Interpreters.Common.MultipleConditionParam import MultipleConditionParam
 from Tokens.TokenEnum import TokenEnum as te
 from Interpreters.Expression import Expression
 
+
+from AST.WhileAST import WhileAST
 """
 Class for variables declaration of while loop
 
@@ -26,38 +28,54 @@ class WhileDeclaration(Expression):
         try:
             self.eat(te.TSUKUYOMI)
             self.eat(te.LPAREN)
-            
-            if self.current_token.type == te.LPAREN:
-                self.var_multiple = MultipleConditionParam(self.token_index, self.tokens)
-                self.att_token(self.var_conditional())
-            else:
-                self.var_multiple = ConditionParam(self.token_index, self.tokens)
-                self.att_token(self.var_conditional())
+
+            cond = self.conditions()
 
             self.eat(te.RPAREN)
+
+            """Scope // Code inside if statement"""
+
             self.eat(te.LBRACK)
 
-            self.expression.token_index = self.token_index
-            self.expression.current_token = self.current_token
-            t_expression = ThreadWithReturnValue(target=self.expression.parser)
-            t_expression.start()
-            result_expression = t_expression.join()
+            result_list = []
 
-            Expression.append_result(result_expression[2])
+            while self.current_token.type != te.RBRACK:
+                self.expression.token_index = self.token_index
+                self.expression.current_token = self.current_token
 
-            if result_expression[0]:
-                self.token_index = result_expression[1]
-                self.current_token = self.tokens[self.token_index]
-            else:
-                self.error()
+                t_expression = ThreadWithReturnValue(target=self.expression.run_parser)
 
+                t_expression.start()
+                result_expression = t_expression.join()
 
-            #self.att_token(self.var_exp())
+                Expression.append_result(result_expression[2])
+
+                if result_expression[0]:
+                    self.token_index = result_expression[1]
+                    self.current_token = self.tokens[self.token_index]
+                    result_list.append(result_expression[3])
+                else:
+                    self.error()
+
+            # self.att_token(self.var_exp())
             self.eat(te.RBRACK)
 
-            return [True, self.token_index, f'valid while expression']
+            node = WhileAST(condition=cond[3], scope=result_list)
+
+            return [True, self.token_index, f'valid while expression', node]
         except:
-            return [False, self.token_index, 'invalid while expression']
+            return [False, self.token_index, 'invalid while expression', None]
+
+    def conditions(self):
+        if self.current_token.type == te.LPAREN:
+            self.var_multiple = MultipleConditionParam(self.token_index, self.tokens)
+        else:
+            self.var_multiple = ConditionParam(self.token_index, self.tokens)
+
+        result = self.var_conditional()
+        self.att_token(result)
+
+        return result
 
     def var_conditional(self):
         result_var_mult = self.var_multiple.run_glc()

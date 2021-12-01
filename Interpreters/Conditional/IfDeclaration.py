@@ -5,6 +5,9 @@ from Interpreters.RThread import ThreadWithReturnValue
 from Interpreters.Common.MultipleConditionParam import MultipleConditionParam
 from Tokens.TokenEnum import TokenEnum as te
 
+from AST.AST import AST
+from AST.IfAST import IfAST
+
 """
 
 GLC
@@ -30,19 +33,27 @@ class IfDeclaration(Expression):
 
     def run_glc(self):
         try:
-            self.if_dec_exp()
-            return [True, self.token_index, f'valid if declaration']
-        except:
-            return [False, self.token_index, f'invalid if declaration']
+            node = self.if_dec_exp()
+            return [True, self.token_index, f'valid if declaration', node]
+        except Exception as e:
+            a = e
+            return [False, self.token_index, f'invalid if declaration', None]
 
-    def if_dec_exp(self) -> bool:
+    def if_dec_exp(self) -> AST:
         self.eat(te.NINJUTSU)
+
+        """Condition"""
+
         self.eat(te.LPAREN)
+
+        result_cond_list = []
 
         self.multiple_cond_param.token_index = self.token_index
         self.multiple_cond_param.current_token = self.current_token
+
         t_multiple_cond_param = ThreadWithReturnValue(target=self.multiple_cond_param.run_glc)
         t_multiple_cond_param.start()
+
         result_multiple_condition_param = t_multiple_cond_param.join()
         Expression.append_result(result_multiple_condition_param[2])
 
@@ -53,20 +64,33 @@ class IfDeclaration(Expression):
             self.error()
 
         self.eat(te.RPAREN)
+
+        """Scope // Code inside if statement"""
+
         self.eat(te.LBRACK)
 
-        self.expression.token_index = self.token_index
-        self.expression.current_token = self.current_token
-        t_expression = ThreadWithReturnValue(target=self.expression.parser)
-        t_expression.start()
-        result_expression = t_expression.join()
+        result_list = []
 
-        Expression.append_result(result_expression[2])
+        while self.current_token.type != te.RBRACK:
+            self.expression.token_index = self.token_index
+            self.expression.current_token = self.current_token
 
-        if result_expression[0]:
-            self.token_index = result_expression[1]
-            self.current_token = self.tokens[self.token_index]
-        else:
-            self.error()
+            t_expression = ThreadWithReturnValue(target=self.expression.run_parser)
 
-        return True
+            t_expression.start()
+            result_expression = t_expression.join()
+
+            Expression.append_result(result_expression[2])
+
+            if result_expression[0]:
+                self.token_index = result_expression[1]
+                self.current_token = self.tokens[self.token_index]
+                result_list.append(result_expression[3])
+            else:
+                self.error()
+
+        self.eat(te.RBRACK)
+
+        node = IfAST(condition=result_multiple_condition_param[3], scope=result_list)
+
+        return node

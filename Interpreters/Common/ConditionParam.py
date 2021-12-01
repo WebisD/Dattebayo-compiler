@@ -5,6 +5,8 @@ from Interpreters.Expression import Expression
 # from Interpreters.OperationInterpreter import OperationInterpreter
 from Interpreters.Common.Values import Values
 
+from AST.BinOp import BinOp
+
 """
 
 ConditionParam ⇐ (Values , Comparators , Value) ;
@@ -18,13 +20,11 @@ class ConditionParam(Expression):
 
     def run_glc(self):
         try:
-            self.check_type_value()
-            self.var_exp()
-            self.check_type_value()
+            node = BinOp(left=self.check_type_value()[3], op=self.comparator(), right=self.check_type_value()[3])
 
-            return [True, self.token_index, f'valid single condition']
+            return [True, self.token_index, f'valid single condition', node]
         except:
-            return [False, self.token_index, None]
+            return [False, self.token_index, None, None]
 
     def check_type_value(self):
         self.values_interpreter = Values(self.token_index, self.tokens)
@@ -39,7 +39,7 @@ class ConditionParam(Expression):
         
         self.error()
 
-    def var_exp(self):        
+    def comparator(self):
         token = self.current_token
 
         if token.type == te.GENNIN:
@@ -50,3 +50,5 @@ class ConditionParam(Expression):
             self.eat(te.KIRIGAKURE)
         else:
             self.error()
+
+        return token

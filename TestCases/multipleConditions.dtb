@@ -1,0 +1,6 @@
+rasengan myInt haku 30;
+zetsu myBool haku True;
+
+ninjutsu ( myInt gennin 50 kumogakure myBool kirigakure True) {
+    sharingan ("Shall pass");
+}

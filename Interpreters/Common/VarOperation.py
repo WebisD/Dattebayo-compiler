@@ -5,37 +5,42 @@ from Interpreters.Expression import Expression
 
 from AST.NumAST import Num
 from AST.BinOp import BinOp
-
-"""
-Expressions for math operations
-
-expr : term ((PLUS | MINUS) term)*
-term : factor ((MUL | DIV) factor)*
-factor : INTEGER
-"""
+from AST.StringAST import Str
+from AST.VariableAST import VariableAST
 
 
-class NumOperation(Expression):
+class VarOperation(Expression):
     def __init__(self, token_index: int, token_array=None):
         super().__init__(token_index, token_array)
 
     def run_glc(self):
         try:
             result = self.expr()
-            return [True, self.token_index, "valid number/number operation", result]
+            return [True, self.token_index, "valid variable/variable operation", result]
         except Exception as e:
-            return [False, self.token_index, "invalid number/number operation"]
+            return [False, self.token_index, "invalid variable/variable operation"]
 
     def factor(self):
         """factor : INTEGER"""
         token = self.current_token
+        node = None
+
         if token.type == te.INTEGER:
             self.eat(te.INTEGER)
+            node = Num(token)
         elif token.type == te.FLOAT:
             self.eat(te.FLOAT)
+            node = Num(token)
+        elif token.type == te.STRING:
+            self.eat(te.STRING)
+            node = Str(Token)
+        elif token.type == te.IDENTIFIER:
+            self.eat(te.IDENTIFIER)
+            node = VariableAST(name=token.value, value=None)
         else:
             self.error()
-        return Num(token)
+
+        return node
 
     def term(self):
         """term : factor ((MUL | DIV) factor)*"""

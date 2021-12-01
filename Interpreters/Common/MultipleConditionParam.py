@@ -2,6 +2,8 @@ from Interpreters.Common.ConditionParam import ConditionParam
 from Tokens.TokenEnum import TokenEnum as te
 from Interpreters.Expression import Expression
 
+from AST.BinOp import BinOp
+
 """
 Class for variables declaration without initialization
 
@@ -19,22 +21,34 @@ class MultipleConditionParam(Expression):
 
     def run_glc(self):
         try:
+            node = self.single_condition_param()[3]
+
+            while self.current_token.type in (te.KUMOGAKURE, te.AMEGAKURE):
+                operation = self.var_operator()
+                node = BinOp(left=node, op=operation, right=self.single_condition_param()[3])
+
+            return [True, self.token_index, f'valid multiple condition', node]
+        except Exception as e:
+            a = e
+            return [False, self.token_index, f'invalid multiple condition', None]
+
+    def single_condition_param(self):
+        noLparen = False
+        try:
             self.eat(te.LPAREN)
-            self.val_conditional = ConditionParam(self.token_index, self.tokens)
-            self.att_token(self.var_exp_conditional())
-            self.eat(te.RPAREN)
-            if (self.current_token.type != te.LPAREN):
-                self.var_operator()
-
-            if (self.current_token.type != te.RPAREN):
-                self.run_glc()
-
-            return [True, self.token_index, f'valid multiple condition']
         except:
-            if self.current_token.type == te.RPAREN:
-                return [True, self.token_index, f'valid multiple condition']
+            noLparen = True
 
-            return [False, self.token_index, f'invalid multiple condition']
+        self.val_conditional = ConditionParam(self.token_index, self.tokens)
+
+        result = self.var_exp_conditional()
+
+        self.att_token(result)
+
+        if not noLparen:
+            self.eat(te.RPAREN)
+
+        return result
 
     def var_exp_conditional(self):
         result_var_conditional = self.val_conditional.run_glc()
@@ -55,6 +69,8 @@ class MultipleConditionParam(Expression):
             self.eat(te.AMEGAKURE)
         else:
             self.error()
+
+        return token
     
     def att_token(self, result):
         self.current_token = self.tokens[result[1]]
