@@ -45,7 +45,7 @@ class Interpreter(Expression):
                 AST.all_ast.append(result[3])
 
         except Exception as e:
-            print('deu merda', e)
+            print('Error:', e)
 
         return AST.all_ast
 
@@ -84,7 +84,6 @@ class Interpreter(Expression):
             if result[0]:
                 self.marker_index = result[1]
                 self.update_interpreter_params()
-                print(f"It's a {result[2]}")
                 return [True, self.token_index, result[2], result[3]]
 
         self.error()

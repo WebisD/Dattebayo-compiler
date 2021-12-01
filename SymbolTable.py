@@ -12,7 +12,7 @@ class SymbolTable:
         name = SymbolTable.check_name(variable[0])
 
         if not name:
-            print("Já existe, zé")
+            print("Already exists")
 
     def check_name(name):
         if name in SymbolTable.symbol_table:

@@ -11,7 +11,6 @@ class Main:
     def __init__(self, dtb_file):
         self.checkArgs(dtb_file)
         self.dtb_file = dtb_file
-        print(self.dtb_file)
         self.compileFile()
 
     def checkArgs(self, dtb_file):

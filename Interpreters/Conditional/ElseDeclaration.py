@@ -40,9 +40,9 @@ class ElseDeclaration(Expression):
             t_expression = ThreadWithReturnValue(target=self.expression.run_parser)
 
             t_expression.start()
-            print("START")
+
             result_expression = t_expression.join()
-            print("RESULT")
+
             Expression.append_result(result_expression[2])
 
             if result_expression[0]:
@@ -50,7 +50,6 @@ class ElseDeclaration(Expression):
                 self.current_token = self.tokens[self.token_index]
                 result_list.append(result_expression[3])
             else:
-                print("AQUI")
                 self.error()
 
         self.eat(te.RBRACK)

@@ -27,24 +27,21 @@ class DattebayoCompiler:
     def check_code(self):
         self.check_lexer(self.code_file)
         self.check_syntax(self.code_file)
-        #Expression.print_logs()
+        # Expression.print_logs()
 
     def check_lexer(self, line):
-        self.log(self.__class__, self.check_lexer, "start")
+        # self.log(self.__class__, self.check_lexer, "start")
         self.lexer_output = self.lexer.run_lexer(self.code_file)
         # self.print_lexer_output()
-        self.log(self.__class__, self.check_lexer, "end")
+        # self.log(self.__class__, self.check_lexer, "end")
 
     def check_syntax(self, line):
-        self.log(self.__class__, self.check_syntax, "start")
+        # self.log(self.__class__, self.check_syntax, "start")
         self.interpreter = Interpreter(self.lexer, self.lexer_output)
         result = self.interpreter.parser()
-        print(len(result))
         visitor = InterpreterVisitor(result, self.file_name)
         code = visitor.run_visitor()
-        print(code)
-        # print(result)
-        self.log(self.__class__, self.check_syntax, "end")
+        # self.log(self.__class__, self.check_syntax, "end")
 
     def print_lexer_output(self):
         for token in self.lexer_output:

@@ -15,6 +15,8 @@ class InterpreterVisitor(NodeVisitor):
             f.write(code + '\n')
         f.close()
 
+        print(f"Your code is in: TestCases/GeneratedCases/{self.file_name}.py")
+
     def visit_BinOp(self, node, indentation=None):
         final_code = ""
         if node.op.type == te.FUUMASHURIKEN:
