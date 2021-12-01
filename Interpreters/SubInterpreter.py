@@ -15,6 +15,12 @@ from Tokens.TokenEnum import TokenEnum as te
 
 class SubInterpreter(Expression):
     def __init__(self, token_index: int, token_array=None):
+        """ Performs the creation of an object of type SubInterpreter. This class
+        will be execute all GLCs and check the results
+
+        :param token_index: index of list tokens
+        :param token_array: list tokens
+        """
         super().__init__(token_index, token_array)
 
         self.expression = Expression(self.token_index, self.tokens)
@@ -25,6 +31,9 @@ class SubInterpreter(Expression):
         self.conditionalInterpreter = ConditionalExpression(self.token_index, self.tokens)
 
     def run_glc(self):
+        """ Run all GLCs in different classes and get the return
+
+        """
         try:
             result = self.exprs()
             return [True, self.token_index, f"Sub code:  {result[2]}"]
@@ -32,6 +41,9 @@ class SubInterpreter(Expression):
             return [False, self.token_index, 'invalid sub code']
 
     def exprs(self):
+        """ Run the GLCs and append the AST results
+        
+        """
         self.operationInterpreter = NumOperation(self.token_index, self.tokens)
         self.variableInterpreter = VariableExpression(self.token_index, self.tokens)
         self.whileInterpreter = WhileDeclaration(self.token_index, self.tokens)

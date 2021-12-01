@@ -12,6 +12,9 @@ Check if the words (tokens) are correct
 
 class Lexer:
     def __init__(self):
+        """ Performs the creation of an object of type Lexer
+
+        """
         self.token_array = TokenArray()
         self.current_text: str or None = None
         self.is_reading: bool = False
@@ -24,6 +27,9 @@ class Lexer:
         self.pattern_split_text = '''\s+(?=(?:[^"]|"[^"]*")*$)'''
 
     def run_lexer(self, code: TextIO) -> List[Any]:
+        """ Run the lexer to get all tokens in .dtb file
+
+        """
         self.all_tokens: List[Any] = []
 
         for line in code.readlines():
@@ -43,21 +49,38 @@ class Lexer:
         return self.all_tokens
 
     def get_input(self, text):
+        """ Get the text input and set in current text variable
+
+        :param text: text to set in current_text
+
+        """
         self.current_text = text
         self.is_reading = True
 
     def finish(self):
+        """ Finish the read
+
+        """
         self.current_text: str or None = None
         self.is_reading: bool = False
 
     def check_word(self, pattern: str, text: str) -> Optional[Match[str]]:
+        """ Check the word
+
+        """
         match = re.match(pattern, text, re.MULTILINE)
         return match
 
     def replace_word(self, pattern: str, replacement: str, target: str):
+        """ Replace the word
+
+        """
         return re.sub(pattern, replacement, target)
 
     def find_longest_match(self):
+        """ Find the longest match
+
+        """
         max_match = [0, None]
         k_index = -1
 
@@ -72,6 +95,9 @@ class Lexer:
         return max_match[1], k_index
 
     def get_tokens(self) -> List[Token]:
+        """ return the list of all tokens
+
+        """
         if not self.is_reading:
             return []
 
@@ -107,4 +133,7 @@ class Lexer:
         return tokens
 
     def error(self, text):
+        """ Raise a custom exception
+
+        """
         raise Exception(f"Invalid token: {text}")

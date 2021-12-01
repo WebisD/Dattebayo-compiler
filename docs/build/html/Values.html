@@ -196,22 +196,36 @@
 <dl class="py method">
 <dt id="Interpreters.Common.Values.Values.check_num_operation">
 <code class="sig-name descname"><span class="pre">check_num_operation</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Interpreters.Common.Values.Values.check_num_operation" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Will check the number operator based on NumOperation GLC</p>
+</dd></dl>
 
 <dl class="py method">
 <dt id="Interpreters.Common.Values.Values.check_str_operation">
 <code class="sig-name descname"><span class="pre">check_str_operation</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Interpreters.Common.Values.Values.check_str_operation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Will check the str operator based on StrOperation GLC</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Interpreters.Common.Values.Values.check_var_operation">
+<code class="sig-name descname"><span class="pre">check_var_operation</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Interpreters.Common.Values.Values.check_var_operation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Will check the var operator based on VarOperation GLC</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="Interpreters.Common.Values.Values.current_token">
+<code class="sig-name descname"><span class="pre">current_token</span></code><em class="property"><span class="pre">:</span> <span class="pre">Token</span></em><a class="headerlink" href="#Interpreters.Common.Values.Values.current_token" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt id="Interpreters.Common.Values.Values.run_glc">
 <code class="sig-name descname"><span class="pre">run_glc</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Interpreters.Common.Values.Values.run_glc" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Empty method to be implemented in every class</p>
+</dd></dl>
 
 <dl class="py method">
 <dt id="Interpreters.Common.Values.Values.values_glc">
 <code class="sig-name descname"><span class="pre">values_glc</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Interpreters.Common.Values.Values.values_glc" title="Permalink to this definition">¶</a></dt>
-<dd><p>Values : Num | STRING | BOOLEAN | IDENTIFIER | NumOperation | StrOperation</p>
+<dd><p>Run the GLC of Values, checking every possible operation and will return the node based on BinOp and custom logs.</p>
 </dd></dl>
 
 </dd></dl>

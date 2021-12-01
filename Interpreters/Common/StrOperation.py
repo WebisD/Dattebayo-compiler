@@ -17,9 +17,17 @@ factor : STRING
 
 class StrOperation(Expression):
     def __init__(self, token_index: int, token_array=None):
+        """ Performs the creation of an object of type StrOperation
+
+        :param token_index: index of list tokens
+        :param token_array: list tokens
+        """
         super().__init__(token_index, token_array)
 
     def run_glc(self):
+        """ Run the GLC of StrOperation and will return the node based on BinOp and custom logs.
+
+        """
         try:
             result = self.expr()
             return [True, self.token_index, "valid string/ string operation", result]
@@ -27,7 +35,9 @@ class StrOperation(Expression):
             return [False, self.token_index, "invalid string/ string operation", None]
 
     def factor(self):
-        """factor : STRING"""
+        """ Gets the factor of operation 
+
+        """
         token = self.current_token
 
         self.eat(te.STRING)
@@ -35,7 +45,9 @@ class StrOperation(Expression):
         return Str(token)
 
     def expr(self):
-        """expr : factor (PLUS factor)*"""
+        """ Return the node of operation based on term and operation
+
+        """
         node = self.factor()
 
         while self.current_token.type == te.FUUMASHURIKEN:

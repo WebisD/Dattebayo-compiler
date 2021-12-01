@@ -27,11 +27,21 @@ Expression : ExpressionVariable | ConditionExpr | WhileDeclaration | PrintDeclar
 
 class IfDeclaration(Expression):
     def __init__(self, token_index: int, token_array=None, interpreter=None):
+        """ Performs the creation of an object of type IfDeclaration, in 
+        addition will create the GLC of MultipleConditionParam
+
+        :param token_index: index of list tokens
+        :param token_array: list tokens
+        :param interpreter: a copy of interpreter with all GLCs 
+    """
         super().__init__(token_index, token_array)
         self.multiple_cond_param = MultipleConditionParam(token_index, token_array)
         self.expression = copy.deepcopy(interpreter)
 
     def run_glc(self):
+        """ Run the GLC of IfDeclaration and will return the node based on BinOp and custom logs.
+
+        """
         try:
             node = self.if_dec_exp()
             return [True, self.token_index, f'valid if declaration', node]
@@ -40,6 +50,10 @@ class IfDeclaration(Expression):
             return [False, self.token_index, f'invalid if declaration', None]
 
     def if_dec_exp(self) -> AST:
+        """ Check the GLC of IfDeclaration and return the If AST. In addition, will
+        execute the interpreter to check block of codes inside the if
+
+        """
         self.eat(te.NINJUTSU)
 
         """Condition"""

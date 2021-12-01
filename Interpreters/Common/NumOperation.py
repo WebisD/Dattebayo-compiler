@@ -17,9 +17,17 @@ factor : INTEGER
 
 class NumOperation(Expression):
     def __init__(self, token_index: int, token_array=None):
+        """ Performs the creation of an object of type NumOperation
+
+        :param token_index: index of list tokens
+        :param token_array: list tokens
+        """
         super().__init__(token_index, token_array)
 
     def run_glc(self):
+        """ Run the GLC of NumOperation and will return node based on BinOp and custom logs.
+
+        """
         try:
             result = self.expr()
             return [True, self.token_index, "valid number/number operation", result]
@@ -27,7 +35,9 @@ class NumOperation(Expression):
             return [False, self.token_index, "invalid number/number operation"]
 
     def factor(self):
-        """factor : INTEGER"""
+        """ Gets the factor of operation 
+
+        """
         token = self.current_token
         if token.type == te.INTEGER:
             self.eat(te.INTEGER)
@@ -38,7 +48,9 @@ class NumOperation(Expression):
         return Num(token)
 
     def term(self):
-        """term : factor ((MUL | DIV) factor)*"""
+        """ Gets the term of operation 
+
+        """
         node = self.factor()
 
         while self.current_token.type in (te.SHURIKEN, te.KATANA):
@@ -52,7 +64,9 @@ class NumOperation(Expression):
         return node
 
     def expr(self):
-        """expr : term ((PLUS | MINUS) term)*"""
+        """ Return the node of operation based on term and operation
+
+        """
         node = self.term()
 
         while self.current_token.type in (te.FUUMASHURIKEN, te.KUNAI):

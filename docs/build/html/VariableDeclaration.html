@@ -106,6 +106,16 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">VariableDeclaration module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="VariableExpression.html">VariableExpression module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="VariableInitialization.html">VariableInitialization module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PrintExpression.html">PrintExpression module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ConditionalExpression.html">ConditionalExpression module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ElseDeclaration.html">ElseDeclaration module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="IfDeclaration.html">IfDeclaration module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Values.html">Values module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="StrOperation.html">StrOperation module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NumOperation.html">NumOperation module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Number.html">Number module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MultipleConditionParam.html">MultipleConditionParam module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ConditionParam.html">ConditionParam module</a></li>
 </ul>
 </li>
 </ul>
@@ -183,25 +193,33 @@
 <dt id="Interpreters.Variable.VariableDeclaration.VariableDeclaration">
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">Interpreters.Variable.VariableDeclaration.</span></code><code class="sig-name descname"><span class="pre">VariableDeclaration</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token_index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token_array</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Interpreters.Variable.VariableDeclaration.VariableDeclaration" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="Expression.html#Interpreters.Expression.Expression" title="Interpreters.Expression.Expression"><code class="xref py py-class docutils literal notranslate"><span class="pre">Interpreters.Expression.Expression</span></code></a></p>
+<dl class="py attribute">
+<dt id="Interpreters.Variable.VariableDeclaration.VariableDeclaration.current_token">
+<code class="sig-name descname"><span class="pre">current_token</span></code><em class="property"><span class="pre">:</span> <a class="reference internal" href="Token.html#Tokens.Token.Token" title="Tokens.Token.Token"><span class="pre">Tokens.Token.Token</span></a></em><a class="headerlink" href="#Interpreters.Variable.VariableDeclaration.VariableDeclaration.current_token" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
 <dt id="Interpreters.Variable.VariableDeclaration.VariableDeclaration.identifier">
 <code class="sig-name descname"><span class="pre">identifier</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Interpreters.Variable.VariableDeclaration.VariableDeclaration.identifier" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Check the identifier of variable</p>
+</dd></dl>
 
 <dl class="py method">
 <dt id="Interpreters.Variable.VariableDeclaration.VariableDeclaration.run_glc">
 <code class="sig-name descname"><span class="pre">run_glc</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Interpreters.Variable.VariableDeclaration.VariableDeclaration.run_glc" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Run the GLC of VariableDeclaration and will return the result and custom logs.</p>
+</dd></dl>
 
 <dl class="py method">
 <dt id="Interpreters.Variable.VariableDeclaration.VariableDeclaration.var_dec_glc">
 <code class="sig-name descname"><span class="pre">var_dec_glc</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Interpreters.Variable.VariableDeclaration.VariableDeclaration.var_dec_glc" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Check the GLC of VariableDeclaration and throw a error if something is wrong</p>
+</dd></dl>
 
 <dl class="py method">
 <dt id="Interpreters.Variable.VariableDeclaration.VariableDeclaration.variable_type">
 <code class="sig-name descname"><span class="pre">variable_type</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Interpreters.Variable.VariableDeclaration.VariableDeclaration.variable_type" title="Permalink to this definition">¶</a></dt>
-<dd><p>VariableType : RASENGAN | RAIKIRI | ZETSU | KUCHIYOSE</p>
+<dd><p>Check the type of variable</p>
 </dd></dl>
 
 </dd></dl>

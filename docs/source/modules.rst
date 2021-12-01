@@ -17,6 +17,7 @@ Dattebayo-Compiler
    DattebayoCompiler
    RThread
    Interpreter
+   SubInterpreter
    Expression
    Errors
    WhileDeclaration
@@ -33,5 +34,8 @@ Dattebayo-Compiler
    Number
    MultipleConditionParam
    ConditionParam
+   VarOperation
+   InterpreterVisitor
+   NodeVisitor
 
    

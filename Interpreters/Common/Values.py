@@ -21,6 +21,13 @@ Operation ⇐ FUUMASHURIKEN | KUNAI | SHURIKEN | KATANA ;
 
 class Values(Expression):
     def __init__(self, token_index: int, token_array=None):
+        """ Performs the creation of an object of type Values, in addition
+        will create the classes that will interpret the NumOperation, StrOperation,
+        VarOperation GLC
+
+        :param token_index: index of list tokens
+        :param token_array: list tokens
+        """
         super().__init__(token_index, token_array)
 
         self.num_operation = NumOperation(token_index, token_array)
@@ -35,7 +42,9 @@ class Values(Expression):
             return [False, self.token_index, None, None]
 
     def values_glc(self):
-        """Values : Num | STRING | BOOLEAN | IDENTIFIER | NumOperation | StrOperation"""
+        """ Run the GLC of Values, checking every possible operation and will return the node based on BinOp and custom logs.
+
+        """        
         token = self.current_token
         type_value = None
         node = None
@@ -71,6 +80,9 @@ class Values(Expression):
         return [True, self.token_index, type_value, node]
 
     def check_num_operation(self):
+        """ Will check the number operator based on NumOperation GLC
+
+        """ 
         self.num_operation = NumOperation(self.token_index, self.tokens)
         num_op = self.num_operation.run_glc()
 
@@ -81,6 +93,9 @@ class Values(Expression):
         return num_op[2], num_op[3]
 
     def check_str_operation(self):
+        """ Will check the str operator based on StrOperation GLC
+
+        """ 
         self.str_operation = StrOperation(self.token_index, self.tokens)
         str_op = self.str_operation.run_glc()
 
@@ -91,6 +106,9 @@ class Values(Expression):
         return str_op[2], str_op[3]
 
     def check_var_operation(self):
+        """ Will check the var operator based on VarOperation GLC
+
+        """ 
         self.var_operation = VarOperation(self.token_index, self.tokens)
         var_op = self.var_operation.run_glc()
 

@@ -1,6 +1,10 @@
 from enum import Enum
 
 
+""" Enum class of Tokens
+        
+"""
+
 class TokenEnum(Enum):
     NINJUTSU = "if"
     GENJUTSU = "elif"

@@ -16,11 +16,20 @@ Expression : ExpressionVariable | ConditionExpr | WhileDeclaration | PrintDeclar
 
 
 class ElseDeclaration(Expression):
+    """ Performs the creation of an object of type ElseDeclaration
+
+        :param token_index: index of list tokens
+        :param token_array: list tokens
+        :param interpreter: a copy of interpreter with all GLCs 
+    """
     def __init__(self, token_index: int, token_array=None, interpreter=None):
         super().__init__(token_index, token_array)
         self.expression = copy.deepcopy(interpreter)
 
     def run_glc(self):
+        """ Run the GLC of ElseDeclaration and will return the node based on BinOp and custom logs.
+
+        """
         try:
             result = self.else_dec_exp()
             return [True, self.token_index, f'valid else declaration', result]
@@ -29,6 +38,10 @@ class ElseDeclaration(Expression):
             return [False, self.token_index, f'invalid else declaration', None]
 
     def else_dec_exp(self):
+        """ Check the GLC of ElseDeclaration and return the Else AST. In addition, will
+        execute the interpreter to check block of codes inside the else
+
+        """
         self.eat(te.TAIJUTSU)
         self.eat(te.LBRACK)
 

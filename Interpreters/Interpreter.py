@@ -17,6 +17,12 @@ from AST.AST import AST
 
 class Interpreter(Expression):
     def __init__(self, lexer, token_array=None):
+        """ Performs the creation of an object of type Interpreter. This class
+        will be execute all GLCs and check the results
+
+        :param token_index: index of list tokens
+        :param token_array: list tokens
+        """
         self.token_index = 0
 
         super().__init__(self.token_index, token_array)
@@ -34,9 +40,15 @@ class Interpreter(Expression):
         self.interpreterCopy = None
 
     def error(self):
+        """ Raise the custom exception
+
+        """
         raise Exception('Invalid syntax')
 
     def parser(self):
+        """ Run the parser of GLCs and append the AST results
+        
+        """
         try:
             self.interpreterCopy = copy.deepcopy(self)
 
@@ -50,6 +62,9 @@ class Interpreter(Expression):
         return AST.all_ast
 
     def run_parser(self):
+        """ Run all GLCs in different classes and get the return of each one
+
+        """
         self.interpreterCopy = copy.deepcopy(self)
         #self.operationInterpreter = NumOperation(self.token_index, self.tokens)
         self.variableInterpreter = VariableExpression(self.token_index, self.tokens)

@@ -4,12 +4,19 @@ from Tokens.TokenEnum import TokenEnum
 
 class TokenArray(object):
     def __init__(self, dict_tokens=None):
+        """ Performs the creation of an object of type TokenArray
+
+        :param dict_tokens: Array of tokens
+        """
         if dict_tokens is None:
             dict_tokens = {}
         self.dict_tokens = dict_tokens
         self.add_tokens()
 
     def add_tokens(self):
+        """ Added all tokens in array
+
+        """
         self.dict_tokens['ninjutsu'] = Token(TokenEnum.NINJUTSU, "ninjutsu", r"^(ninjutsu)$")
         self.dict_tokens['genjutsu'] = Token(TokenEnum.GENJUTSU, "genjutsu", r"^(genjutsu)$")
         self.dict_tokens['taijutsu'] = Token(TokenEnum.TAIJUTSU, "taijutsu", r"^(taijutsu)$")

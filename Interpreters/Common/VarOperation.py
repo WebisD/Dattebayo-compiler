@@ -11,9 +11,17 @@ from AST.VariableAST import VariableAST
 
 class VarOperation(Expression):
     def __init__(self, token_index: int, token_array=None):
+        """ Performs the creation of an object of type VarOperation
+
+        :param token_index: index of list tokens
+        :param token_array: list tokens
+        """
         super().__init__(token_index, token_array)
 
     def run_glc(self):
+        """ Run the GLC of VarOperation and will return node based on BinOp and custom logs.
+
+        """
         try:
             result = self.expr()
             return [True, self.token_index, "valid variable/variable operation", result]
@@ -21,7 +29,9 @@ class VarOperation(Expression):
             return [False, self.token_index, "invalid variable/variable operation"]
 
     def factor(self):
-        """factor : INTEGER"""
+        """ Gets the factor of operation 
+
+        """
         token = self.current_token
         node = None
 
@@ -43,7 +53,9 @@ class VarOperation(Expression):
         return node
 
     def term(self):
-        """term : factor ((MUL | DIV) factor)*"""
+        """ Gets the term of operation 
+
+        """
         node = self.factor()
 
         while self.current_token.type in (te.SHURIKEN, te.KATANA):
@@ -57,7 +69,9 @@ class VarOperation(Expression):
         return node
 
     def expr(self):
-        """expr : term ((PLUS | MINUS) term)*"""
+        """ Return the node of operation based on term and operation
+
+        """
         node = self.term()
 
         while self.current_token.type in (te.FUUMASHURIKEN, te.KUNAI):

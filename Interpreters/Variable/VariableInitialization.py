@@ -20,10 +20,20 @@ Operation ⇐ FUUMASHURIKEN | KUNAI | SHURIKEN | KATANA ;
 
 class VariableInitialization(Expression):
     def __init__(self, token_index: int, token_array=None):
+        """ Performs the creation of an object of type VariableInitialization, in addition
+        will create the class that will interpret the Values GLC
+
+
+        :param token_index: index of list tokens
+        :param token_array: list tokens
+        """
         super().__init__(token_index, token_array)
         self.values_interpreter = Values(token_index, token_array)
 
     def run_glc(self):
+        """ Run the GLC of VariableInitialization and will return the node based on AST and custom logs.
+
+        """
         try:
             result = self.var_ini_glc()
             return [True, self.token_index, f'initialized with {result[2]}', result[3]]
@@ -32,6 +42,8 @@ class VariableInitialization(Expression):
             return [False, self.token_index, None, None]
 
     def var_ini_glc(self):
+        """ Check the GLC of VariableInitialization and return the Variable AST
+        """
         try:
             self.variable_type()
         except:
@@ -51,8 +63,9 @@ class VariableInitialization(Expression):
         return type_value
 
     def variable_type(self):
-        """VariableType : RASENGAN | RAIKIRI | ZETSU | KUCHIYOSE"""
+        """ Check the type of variable 
 
+        """
         token = self.current_token
 
         if token.type == te.RASENGAN:
@@ -67,6 +80,9 @@ class VariableInitialization(Expression):
             self.error()
 
     def check_type_value(self):
+        """ Check the type of variable based on Value GLC 
+
+        """
         self.values_interpreter = Values(self.token_index, self.tokens)
         type_value = self.values_interpreter.run_glc()
 

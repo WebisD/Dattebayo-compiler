@@ -38,6 +38,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="PrintExpression module" href="PrintExpression.html" />
     <link rel="prev" title="VariableExpression module" href="VariableExpression.html" /> 
 </head>
 
@@ -105,6 +106,16 @@
 <li class="toctree-l2"><a class="reference internal" href="VariableDeclaration.html">VariableDeclaration module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="VariableExpression.html">VariableExpression module</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">VariableInitialization module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PrintExpression.html">PrintExpression module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ConditionalExpression.html">ConditionalExpression module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ElseDeclaration.html">ElseDeclaration module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="IfDeclaration.html">IfDeclaration module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Values.html">Values module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="StrOperation.html">StrOperation module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NumOperation.html">NumOperation module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Number.html">Number module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MultipleConditionParam.html">MultipleConditionParam module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ConditionParam.html">ConditionParam module</a></li>
 </ul>
 </li>
 </ul>
@@ -185,22 +196,30 @@
 <dl class="py method">
 <dt id="Interpreters.Variable.VariableInitialization.VariableInitialization.check_type_value">
 <code class="sig-name descname"><span class="pre">check_type_value</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Interpreters.Variable.VariableInitialization.VariableInitialization.check_type_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check the type of variable based on Value GLC</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="Interpreters.Variable.VariableInitialization.VariableInitialization.current_token">
+<code class="sig-name descname"><span class="pre">current_token</span></code><em class="property"><span class="pre">:</span> <span class="pre">Token</span></em><a class="headerlink" href="#Interpreters.Variable.VariableInitialization.VariableInitialization.current_token" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt id="Interpreters.Variable.VariableInitialization.VariableInitialization.run_glc">
 <code class="sig-name descname"><span class="pre">run_glc</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Interpreters.Variable.VariableInitialization.VariableInitialization.run_glc" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Run the GLC of VariableInitialization and will return the node based on AST and custom logs.</p>
+</dd></dl>
 
 <dl class="py method">
 <dt id="Interpreters.Variable.VariableInitialization.VariableInitialization.var_ini_glc">
 <code class="sig-name descname"><span class="pre">var_ini_glc</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Interpreters.Variable.VariableInitialization.VariableInitialization.var_ini_glc" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Check the GLC of VariableInitialization and return the Variable AST</p>
+</dd></dl>
 
 <dl class="py method">
 <dt id="Interpreters.Variable.VariableInitialization.VariableInitialization.variable_type">
 <code class="sig-name descname"><span class="pre">variable_type</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Interpreters.Variable.VariableInitialization.VariableInitialization.variable_type" title="Permalink to this definition">¶</a></dt>
-<dd><p>VariableType : RASENGAN | RAIKIRI | ZETSU | KUCHIYOSE</p>
+<dd><p>Check the type of variable</p>
 </dd></dl>
 
 </dd></dl>
@@ -213,6 +232,7 @@
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="PrintExpression.html" class="btn btn-neutral float-right" title="PrintExpression module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
         <a href="VariableExpression.html" class="btn btn-neutral float-left" title="VariableExpression module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 

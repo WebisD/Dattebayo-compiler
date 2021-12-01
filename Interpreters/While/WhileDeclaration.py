@@ -19,12 +19,23 @@ WhileDeclaration ⇐ TSUKUYOMI , LPAREN , MultipleConditionParam , RPAREN , LBRA
 
 class WhileDeclaration(Expression):
     def __init__(self, token_index: int, token_array=None, interpreter=None):
+        """ Performs the creation of an object of type WhileDeclaration, in addition
+        will create the classes that will interpret the VariableExpression and MultipleConditionParam GLC
+
+        :param token_index: index of list tokens
+        :param token_array: list tokens
+        :param interpreter: a copy of interpreter with all GLCs 
+        """
         super().__init__(token_index, token_array)
         self.var_multiple = MultipleConditionParam(token_index, token_array)
         self.var_expr = VariableExpression(token_index, token_array)
         self.expression = interpreter
 
     def run_glc(self):
+        """ Run the GLC of WhileDeclaration and will return the node based on BinOp and custom logs.
+        In addition, will execute the interpreter to check block of codes inside the while
+
+        """
         try:
             self.eat(te.TSUKUYOMI)
             self.eat(te.LPAREN)
@@ -67,6 +78,9 @@ class WhileDeclaration(Expression):
             return [False, self.token_index, 'invalid while expression', None]
 
     def conditions(self):
+        """ Run the GLC of MultipleConditionParam or ConditionParam and return the result.
+
+        """
         if self.current_token.type == te.LPAREN:
             self.var_multiple = MultipleConditionParam(self.token_index, self.tokens)
         else:
@@ -78,6 +92,9 @@ class WhileDeclaration(Expression):
         return result
 
     def var_conditional(self):
+        """ Run the GLC of Conditional and return the result.
+
+        """
         result_var_mult = self.var_multiple.run_glc()
 
         Expression.append_result(result_var_mult[2])
@@ -88,5 +105,8 @@ class WhileDeclaration(Expression):
         self.error()
 
     def att_token(self, result):
+        """ Will atualize the list tokens and token index after execute another GLC
+
+        """
         self.current_token = self.tokens[result[1]]
         self.token_index = result[1]

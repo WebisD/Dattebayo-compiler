@@ -193,22 +193,28 @@
 <dt id="Interpreters.Common.StrOperation.StrOperation">
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">Interpreters.Common.StrOperation.</span></code><code class="sig-name descname"><span class="pre">StrOperation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token_index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token_array</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Interpreters.Common.StrOperation.StrOperation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="Expression.html#Interpreters.Expression.Expression" title="Interpreters.Expression.Expression"><code class="xref py py-class docutils literal notranslate"><span class="pre">Interpreters.Expression.Expression</span></code></a></p>
+<dl class="py attribute">
+<dt id="Interpreters.Common.StrOperation.StrOperation.current_token">
+<code class="sig-name descname"><span class="pre">current_token</span></code><em class="property"><span class="pre">:</span> <a class="reference internal" href="Token.html#Tokens.Token.Token" title="Tokens.Token.Token"><span class="pre">Tokens.Token.Token</span></a></em><a class="headerlink" href="#Interpreters.Common.StrOperation.StrOperation.current_token" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
 <dt id="Interpreters.Common.StrOperation.StrOperation.expr">
 <code class="sig-name descname"><span class="pre">expr</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Interpreters.Common.StrOperation.StrOperation.expr" title="Permalink to this definition">¶</a></dt>
-<dd><p>expr : factor (PLUS factor)*</p>
+<dd><p>Return the node of operation based on term and operation</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="Interpreters.Common.StrOperation.StrOperation.factor">
 <code class="sig-name descname"><span class="pre">factor</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Interpreters.Common.StrOperation.StrOperation.factor" title="Permalink to this definition">¶</a></dt>
-<dd><p>factor : STRING</p>
+<dd><p>Gets the factor of operation</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="Interpreters.Common.StrOperation.StrOperation.run_glc">
 <code class="sig-name descname"><span class="pre">run_glc</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Interpreters.Common.StrOperation.StrOperation.run_glc" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Run the GLC of StrOperation and will return the node based on BinOp and custom logs.</p>
+</dd></dl>
 
 </dd></dl>
 
