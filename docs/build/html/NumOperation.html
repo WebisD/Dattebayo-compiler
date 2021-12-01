@@ -11,8 +11,8 @@
   
 
   
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="static/pygments.css" type="text/css" />
 
   
   
@@ -24,16 +24,16 @@
 
   
   <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
+    <script src="static/js/html5shiv.min.js"></script>
   <![endif]-->
   
     
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="static/documentation_options.js"></script>
+        <script src="static/jquery.js"></script>
+        <script src="static/underscore.js"></script>
+        <script src="static/doctools.js"></script>
     
-    <script type="text/javascript" src="_static/js/theme.js"></script>
+    <script type="text/javascript" src="static/js/theme.js"></script>
 
     
     <link rel="index" title="Index" href="genindex.html" />
@@ -174,7 +174,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="_sources/NumOperation.rst.txt" rel="nofollow"> View page source</a>
+            <a href="sources/NumOperation.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -193,27 +193,33 @@
 <dt id="Interpreters.Common.NumOperation.NumOperation">
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">Interpreters.Common.NumOperation.</span></code><code class="sig-name descname"><span class="pre">NumOperation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token_index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token_array</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Interpreters.Common.NumOperation.NumOperation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="Expression.html#Interpreters.Expression.Expression" title="Interpreters.Expression.Expression"><code class="xref py py-class docutils literal notranslate"><span class="pre">Interpreters.Expression.Expression</span></code></a></p>
+<dl class="py attribute">
+<dt id="Interpreters.Common.NumOperation.NumOperation.current_token">
+<code class="sig-name descname"><span class="pre">current_token</span></code><em class="property"><span class="pre">:</span> <a class="reference internal" href="Token.html#Tokens.Token.Token" title="Tokens.Token.Token"><span class="pre">Tokens.Token.Token</span></a></em><a class="headerlink" href="#Interpreters.Common.NumOperation.NumOperation.current_token" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
 <dt id="Interpreters.Common.NumOperation.NumOperation.expr">
 <code class="sig-name descname"><span class="pre">expr</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Interpreters.Common.NumOperation.NumOperation.expr" title="Permalink to this definition">¶</a></dt>
-<dd><p>expr : term ((PLUS | MINUS) term)*</p>
+<dd><p>Return the node of operation based on term and operation</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="Interpreters.Common.NumOperation.NumOperation.factor">
 <code class="sig-name descname"><span class="pre">factor</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Interpreters.Common.NumOperation.NumOperation.factor" title="Permalink to this definition">¶</a></dt>
-<dd><p>factor : INTEGER</p>
+<dd><p>Gets the factor of operation</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="Interpreters.Common.NumOperation.NumOperation.run_glc">
 <code class="sig-name descname"><span class="pre">run_glc</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Interpreters.Common.NumOperation.NumOperation.run_glc" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Run the GLC of NumOperation and will return node based on BinOp and custom logs.</p>
+</dd></dl>
 
 <dl class="py method">
 <dt id="Interpreters.Common.NumOperation.NumOperation.term">
 <code class="sig-name descname"><span class="pre">term</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Interpreters.Common.NumOperation.NumOperation.term" title="Permalink to this definition">¶</a></dt>
-<dd><p>term : factor ((MUL | DIV) factor)*</p>
+<dd><p>Gets the term of operation</p>
 </dd></dl>
 
 </dd></dl>

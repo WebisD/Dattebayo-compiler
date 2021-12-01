@@ -11,8 +11,8 @@
   
 
   
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="static/pygments.css" type="text/css" />
 
   
   
@@ -24,16 +24,16 @@
 
   
   <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
+    <script src="static/js/html5shiv.min.js"></script>
   <![endif]-->
   
     
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="static/documentation_options.js"></script>
+        <script src="static/jquery.js"></script>
+        <script src="static/underscore.js"></script>
+        <script src="static/doctools.js"></script>
     
-    <script type="text/javascript" src="_static/js/theme.js"></script>
+    <script type="text/javascript" src="static/js/theme.js"></script>
 
     
     <link rel="index" title="Index" href="genindex.html" />
@@ -174,7 +174,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="_sources/MultipleConditionParam.rst.txt" rel="nofollow"> View page source</a>
+            <a href="sources/MultipleConditionParam.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -196,22 +196,37 @@
 <dl class="py method">
 <dt id="Interpreters.Common.MultipleConditionParam.MultipleConditionParam.att_token">
 <code class="sig-name descname"><span class="pre">att_token</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Interpreters.Common.MultipleConditionParam.MultipleConditionParam.att_token" title="Permalink to this definition">¶</a></dt>
+<dd><p>Will atualize the list tokens and token index after execute another GLC</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="Interpreters.Common.MultipleConditionParam.MultipleConditionParam.current_token">
+<code class="sig-name descname"><span class="pre">current_token</span></code><em class="property"><span class="pre">:</span> <span class="pre">Token</span></em><a class="headerlink" href="#Interpreters.Common.MultipleConditionParam.MultipleConditionParam.current_token" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt id="Interpreters.Common.MultipleConditionParam.MultipleConditionParam.run_glc">
 <code class="sig-name descname"><span class="pre">run_glc</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Interpreters.Common.MultipleConditionParam.MultipleConditionParam.run_glc" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Run the GLC of MultipleConditionParam and will return the node based on BinOp and custom logs.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Interpreters.Common.MultipleConditionParam.MultipleConditionParam.single_condition_param">
+<code class="sig-name descname"><span class="pre">single_condition_param</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Interpreters.Common.MultipleConditionParam.MultipleConditionParam.single_condition_param" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run the GLC of ConditionParam and check if it’s necessary call again when they are multiple conditions.</p>
+</dd></dl>
 
 <dl class="py method">
 <dt id="Interpreters.Common.MultipleConditionParam.MultipleConditionParam.var_exp_conditional">
 <code class="sig-name descname"><span class="pre">var_exp_conditional</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Interpreters.Common.MultipleConditionParam.MultipleConditionParam.var_exp_conditional" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Will run the GLC of ConditionParam and will return the result to another function.</p>
+</dd></dl>
 
 <dl class="py method">
 <dt id="Interpreters.Common.MultipleConditionParam.MultipleConditionParam.var_operator">
 <code class="sig-name descname"><span class="pre">var_operator</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Interpreters.Common.MultipleConditionParam.MultipleConditionParam.var_operator" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Will check the operator of conditional based on GLC</p>
+</dd></dl>
 
 </dd></dl>
 

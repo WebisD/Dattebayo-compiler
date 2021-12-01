@@ -11,8 +11,8 @@
   
 
   
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="static/pygments.css" type="text/css" />
 
   
   
@@ -24,21 +24,22 @@
 
   
   <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
+    <script src="static/js/html5shiv.min.js"></script>
   <![endif]-->
   
     
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="static/documentation_options.js"></script>
+        <script src="static/jquery.js"></script>
+        <script src="static/underscore.js"></script>
+        <script src="static/doctools.js"></script>
     
-    <script type="text/javascript" src="_static/js/theme.js"></script>
+    <script type="text/javascript" src="static/js/theme.js"></script>
 
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Lexer module" href="Symbol.html" /> 
+    <link rel="next" title="Token module" href="Token.html" />
+    <link rel="prev" title="Lexer module" href="Symbol_Table.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -87,8 +88,34 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">Dattebayo-Compiler</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="main.html">main module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tokens.html">Tokens module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SyntaxParser.html">SyntaxParser module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SymbolTable.html">SymbolTable module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Symbol.html">Lexer module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Symbol_Table.html">Lexer module</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Lexer module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Token.html">Token module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TokenArray.html">TokenArray module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TokenEnum.html">TokenEnum module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DattebayoCompiler.html">DattebayoCompiler module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="RThread.html">RThread module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Interpreter.html">Interpreter module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Expression.html">Expression module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Errors.html">Errors module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WhileDeclaration.html">WhileDeclaration module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="VariableDeclaration.html">VariableDeclaration module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="VariableExpression.html">VariableExpression module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="VariableInitialization.html">VariableInitialization module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PrintExpression.html">PrintExpression module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ConditionalExpression.html">ConditionalExpression module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ElseDeclaration.html">ElseDeclaration module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="IfDeclaration.html">IfDeclaration module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Values.html">Values module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="StrOperation.html">StrOperation module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NumOperation.html">NumOperation module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Number.html">Number module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MultipleConditionParam.html">MultipleConditionParam module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ConditionParam.html">ConditionParam module</a></li>
 </ul>
 </li>
 </ul>
@@ -147,7 +174,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="_sources/Lexer.rst.txt" rel="nofollow"> View page source</a>
+            <a href="sources/Lexer.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -169,42 +196,55 @@
 <dl class="py method">
 <dt id="Lexer.Lexer.Lexer.check_word">
 <code class="sig-name descname"><span class="pre">check_word</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pattern</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Match</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#Lexer.Lexer.Lexer.check_word" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Check the word</p>
+</dd></dl>
 
 <dl class="py method">
 <dt id="Lexer.Lexer.Lexer.error">
 <code class="sig-name descname"><span class="pre">error</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Lexer.Lexer.Lexer.error" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Raise a custom exception</p>
+</dd></dl>
 
 <dl class="py method">
 <dt id="Lexer.Lexer.Lexer.find_longest_match">
 <code class="sig-name descname"><span class="pre">find_longest_match</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Lexer.Lexer.Lexer.find_longest_match" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Find the longest match</p>
+</dd></dl>
 
 <dl class="py method">
 <dt id="Lexer.Lexer.Lexer.finish">
 <code class="sig-name descname"><span class="pre">finish</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Lexer.Lexer.Lexer.finish" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Finish the read</p>
+</dd></dl>
 
 <dl class="py method">
 <dt id="Lexer.Lexer.Lexer.get_input">
 <code class="sig-name descname"><span class="pre">get_input</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Lexer.Lexer.Lexer.get_input" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Get the text input and set in current text variable</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>text</strong> – text to set in current_text</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="Lexer.Lexer.Lexer.get_tokens">
-<code class="sig-name descname"><span class="pre">get_tokens</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tokens.Token.Token</span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#Lexer.Lexer.Lexer.get_tokens" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-name descname"><span class="pre">get_tokens</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="Token.html#Tokens.Token.Token" title="Tokens.Token.Token"><span class="pre">Tokens.Token.Token</span></a><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#Lexer.Lexer.Lexer.get_tokens" title="Permalink to this definition">¶</a></dt>
+<dd><p>return the list of all tokens</p>
+</dd></dl>
 
 <dl class="py method">
 <dt id="Lexer.Lexer.Lexer.replace_word">
 <code class="sig-name descname"><span class="pre">replace_word</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pattern</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replacement</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Lexer.Lexer.Lexer.replace_word" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Replace the word</p>
+</dd></dl>
 
 <dl class="py method">
 <dt id="Lexer.Lexer.Lexer.run_lexer">
 <code class="sig-name descname"><span class="pre">run_lexer</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">TextIO</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#Lexer.Lexer.Lexer.run_lexer" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Run the lexer to get all tokens in .dtb file</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -216,7 +256,8 @@
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="Symbol.html" class="btn btn-neutral float-left" title="Lexer module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Token.html" class="btn btn-neutral float-right" title="Token module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Symbol_Table.html" class="btn btn-neutral float-left" title="Lexer module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
