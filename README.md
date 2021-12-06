@@ -80,6 +80,8 @@ $ python3 main.py <.dtb file>
 
 # The application will create a output.py file
 
+```
+
 <!-- AUTHORS -->
 ## 🤖 Authors
 
