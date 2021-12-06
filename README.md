@@ -49,9 +49,6 @@
 
 The project consists of a compiler for dattebayo language. The user simply inserts a .dtb file to generate a .py file
 
-![app](https://github.com/antuniooh/Dattebayo-compiler/blob/master/.github/app.gif)
-
-
 <!-- DOCUMENTATION -->
 ## 📖 Documentation
 You can read the code documentation here:   
