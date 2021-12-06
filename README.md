@@ -47,6 +47,8 @@
 <!-- ABOUT THE PROJECT -->
 ## 💻 About The Project
 
+We created a new programming language: Dattebayo!! To enjoy all that this language offers, we created a compiler that converts codes to python files.
+
 The project consists of a compiler for dattebayo language. The user simply inserts a .dtb file to generate a .py file
 
 <!-- DOCUMENTATION -->
