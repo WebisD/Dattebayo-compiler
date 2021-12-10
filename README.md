@@ -1,54 +1,92 @@
-# Compiler
-Compiler 
+<p align="center">
+  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/antuniooh/Dattebayo-compiler">
 
-## GLC
+  <img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/antuniooh/Dattebayo-compiler">
+  
+  <a href="https://github.com/antuniooh/Dattebayo-compiler/commits/master">
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/antuniooh/Dattebayo-compiler">
+  </a>
+  
+   <img alt="GitHub" src="https://img.shields.io/github/license/antuniooh/Dattebayo-compiler">
+</p>
 
-**Expression** ⇐ ExpressionVariable | ConditionExpr | WhileDeclaration | PrintDeclaration ;
+<!-- PROJECT LOGO -->
+<br />
+<p align="center">
+  <a href="https://github.com/antuniooh/Dattebayo-compiler">
+    <img src="images/logo.png" alt="Logo" width="550">
+  </a>
+</p>
 
-<br/><br/><br/>
+<p align="center">
+  <img alt="Ubuntu" src="https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white"/>
+  <img alt="Python" src="https://img.shields.io/badge/python-%2314354C.svg?style=for-the-badge&logo=python&logoColor=white"/>
+</p>
 
-**ExpressionVariable** ⇐ (VariableDeclaration | VariableInitialization) , ENDPOINT ;
 
-**ConditionExpr** ⇐ IfDeclaration | IfDeclaration , ElseDeclaration;
+<!-- TABLE OF CONTENTS -->
+<details open="open">
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#-about-the-project">About The Project</a>
+    </li>
+    <li>
+      <a href="#-documentation">Documentation</a>
+    </li>
+    <li>
+      <a href="#-how-to-run">How To Run</a>
+    </li>
+    <li>
+      <a href="#-authors">Authors</a>
+    </li>
+  </ol>
+</details>
 
-**WhileDeclaration** ⇐ TSUKUYOMI , LPAREN , MultipleConditionParam , RPAREN , LBRACK , Expression , RBRACK ;
 
-**PrintDeclaration** ⇐ SHARINGAN , LPAREN , Values , RPAREN , ENDPOINT ;
+<!-- ABOUT THE PROJECT -->
+## 💻 About The Project
 
-<br/><br/><br/>
+We created a new programming language: Dattebayo!! To enjoy all that this language offers, we created a compiler that converts codes to python files.
 
-**VariableDeclaration** ⇐ VariableType , IDENTIFIER ;
+The project consists of a compiler for dattebayo language. The user simply inserts a .dtb file to generate a .py file
 
-**VariableType** ⇐ RASENGAN | RAIKIRI | ZETSU | KUCHIYOSE ;
+![app](https://github.com/antuniooh/Dattebayo-compiler/blob/main/app.gif)
 
-**VariableInitialization** ⇐ [VariableType] , IDENTIFIER , HAKU , Values;
+<!-- DOCUMENTATION -->
+## 📖 Documentation
+You can read the code documentation here:   
 
-<br/><br/><br/>
+<a href="https://webisd.github.io/Dattebayo-compiler/" target="_blank">
+  <img alt="a" src="https://img.shields.io/badge/read-documentation-blue?style=for-the-badge">
+</a>
 
-**IfDeclaration** ⇐ NINJUTSU , LPAREN , MultipleConditionParam , RPAREN , LBRACK , Expression , RBRACK;
-Num ⇐ INT | FLOAT ;
 
-**ElseDeclaration** ⇐ TAIJUTSU, LBRACK , Expression , RBRACK;
+<!-- HOW TO RUN -->
+## 🚀 How To Run
 
-<br/><br/><br/>
+```bash
 
-**MultipleConditionParam** ⇐  {[ConditionParam , Operator]} , ConditionParam ;
+# Clone the repository
+$ git clone https://github.com/antuniooh/Dattebayo-compiler.git
 
-**ConditionParam** ⇐ (Values , Comparators , Value) ;
+# Access the project folder in your terminal / cmd
+$ cd Dattebayo-compiler/code
 
-**Comparators** ⇐ KIRIGAKURE ;
+# Download dependencies
+$ pip3 install -r requirements.txt
 
-**Operator** ⇐ KUMOGAKURE , AMEGAKURE ;
+# Run the application
+$ python3 main.py <.dtb file>
 
-<br/><br/><br/>
+# The application will create a output.py file
 
-**Values** ⇐ Num | STRING | BOOLEAN | IDENTIFIER | NumOperation | StrOperation ;
+```
 
-**Num** : INT | FLOAT
+<!-- AUTHORS -->
+## 🤖 Authors
 
-**NumOperation** ⇐ (Num | IDENTIFIER) , Operation , (Num | IDENTIFIER) , [{Operation , (Num | IDENTIFIER)}] ;
-
-**Operation** ⇐ FUUMASHURIKEN | KUNAI | SHURIKEN | KATANA ;
-
-**StrOperation** ⇐ STRING , FUUMASHURIKEN , STRING , [{FUUMASHURIKEN , STRING}] ;
-
+[Antonio Gustavo](https://github.com/antuniooh)           |  [João Vitor Dias](https://github.com/JoaoDias-223)           |  [Weverson da Silva](https://github.com/antuniooh)
+:-------------------------:|:-------------------------:|:-------------------------:
+<img src="https://avatars.githubusercontent.com/u/51217271?v=4" alt="drawing" width="150"/>  |  <img src="https://avatars.githubusercontent.com/u/63318342?v=4" alt="drawing" width="150"/>| <img src="https://avatars.githubusercontent.com/u/49571908?v=4" alt="drawing" width="150"/>
+22.119.001-0 | 22.119.006-9 | 22.119.004-4
