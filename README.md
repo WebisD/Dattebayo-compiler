@@ -51,7 +51,7 @@ We created a new programming language: Dattebayo!! To enjoy all that this langua
 
 The project consists of a compiler for dattebayo language. The user simply inserts a .dtb file to generate a .py file
 
-![app](https://github.com/antuniooh/Dattebayo-compiler/app.gif)
+![app](https://github.com/antuniooh/Dattebayo-compiler/blob/main/app.gif)
 
 <!-- DOCUMENTATION -->
 ## 📖 Documentation
